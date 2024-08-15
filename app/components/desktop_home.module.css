@@ -12,10 +12,7 @@
     -webkit-text-fill-color: transparent;
 }
 .isSidak {
-    font-family: SAIBA-45;
     font-size: 130px;
-    font-style: normal;
-    font-variation-settings: Regular;
     font-weight: 400;
     line-height: normal;
     background: linear-gradient(90deg, #72dcff 0%, #cd5bf3 100%);
