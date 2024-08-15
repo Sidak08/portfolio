@@ -1,0 +1,24 @@
+.myName {
+    -webkit-text-stroke-width: 2;
+    -webkit-text-stroke-color: #000;
+    font-family: SAIBA-45;
+    font-size: 130px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: linear-gradient(90deg, #fb39be 0%, #f12459 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.isSidak {
+    font-family: SAIBA-45;
+    font-size: 130px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: linear-gradient(90deg, #72dcff 0%, #cd5bf3 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
