@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useGlitch } from "react-powerglitch";
 
 function Contact({ visible }) {
   const icon = {
