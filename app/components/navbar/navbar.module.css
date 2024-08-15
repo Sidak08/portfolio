@@ -1,0 +1,26 @@
+.navBarBox {
+    border-radius: 12px;
+    border: 1px solid #7c7b7b;
+    background: rgba(162, 160, 160, 0.13);
+    left: calc(50% - 200px);
+}
+.button {
+    background: transparent; /* Ensure no background */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: transform 0.3s ease; /* Optional: animate scaling on hover */
+}
+
+.button svg {
+    transition: stroke 0.3s ease; /* Smooth transition for stroke color */
+}
+
+.buttonActive svg {
+    /* This class will be conditionally applied to the active button */
+    stroke: var(--active-color); /* Use a CSS variable for active color */
+}
+
+.buttonInactive svg {
+    /* This class is for inactive buttons */
+    stroke: var(--inactive-color); /* Use a CSS variable for inactive color */
+}

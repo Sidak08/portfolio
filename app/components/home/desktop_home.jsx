@@ -3,7 +3,7 @@ import styles from "./desktop_home.module.css";
 import localFont from "next/font/local";
 
 const myFont = localFont({
-  src: ".././fonts/cyber-reg-font.woff2",
+  src: "../.././fonts/cyber-reg-font.woff2",
   display: "swap",
 });
 
