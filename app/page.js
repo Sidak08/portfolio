@@ -5,7 +5,7 @@ import Navbar from "./components/navbar/navbar";
 
 export default function Home() {
   return (
-    <main className="w-full h-[100vh]">
+    <main className="w-full h-[100vh] noScroll">
       <Navbar />
       <DesktopHome />
       <DesktopAboutMe />

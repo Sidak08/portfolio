@@ -3,6 +3,7 @@
     border: 1px solid #7c7b7b;
     background: rgba(162, 160, 160, 0.13);
     left: calc(50% - 200px);
+    position: fixed;
 }
 .button {
     background: transparent; /* Ensure no background */

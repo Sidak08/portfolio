@@ -13,7 +13,7 @@ export default function DesktopHome() {
   const glitch = useGlitch();
 
   return (
-    <section className="w-full h-screen bg-[#0A0F13]">
+    <section className="w-full h-screen bg-[#0A0F13]" id="home">
       <div className="flex items-center justify-center w-full h-screen">
         <div className="flex items-center justify-evenly w-full">
           <div ref={glitch.ref}>

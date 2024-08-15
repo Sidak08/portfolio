@@ -1,11 +1,18 @@
 "use client";
 import { Contact, Home, Projects, Resume, User } from "./icons";
 import styles from "./navbar.module.css";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { motion, useScroll } from "framer-motion";
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
+  const router = useRouter();
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    console.log(scrollYProgress);
+  }, [scrollYProgress]);
 
   return (
     <div
@@ -14,6 +21,7 @@ export default function Navbar() {
       <button
         onClick={() => {
           setActive("home");
+          router.push("/#home");
         }}
       >
         <Home visible={active === "home" ? "animate" : "hidden"} />
@@ -21,6 +29,7 @@ export default function Navbar() {
       <button
         onClick={() => {
           setActive("user");
+          router.push("/#about_me");
         }}
       >
         <User visible={active === "user" ? "animate" : "hidden"} />
@@ -28,6 +37,7 @@ export default function Navbar() {
       <button
         onClick={() => {
           setActive("projects");
+          router.push("/#projects");
         }}
       >
         <Projects visible={active === "projects" ? "animate" : "hidden"} />
@@ -35,6 +45,7 @@ export default function Navbar() {
       <button
         onClick={() => {
           setActive("resume");
+          router.push("/#resume");
         }}
       >
         <Resume visible={active === "resume" ? "animate" : "hidden"} />
@@ -42,6 +53,7 @@ export default function Navbar() {
       <button
         onClick={() => {
           setActive("contact");
+          router.push("/#contact");
         }}
       >
         <Contact visible={active === "contact" ? "animate" : "hidden"} />
