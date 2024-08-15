@@ -23,28 +23,28 @@ export default function Navbar() {
           setActive("user");
         }}
       >
-        <User color={active === "user" ? "#7DCDFD" : "#fff"} />
+        <User visible={active === "user" ? "animate" : "hidden"} />
       </button>
       <button
         onClick={() => {
           setActive("projects");
         }}
       >
-        <Projects color={active === "projects" ? "#ED256C" : "#fff"} />
+        <Projects visible={active === "projects" ? "animate" : "hidden"} />
       </button>
       <button
         onClick={() => {
           setActive("resume");
         }}
       >
-        <Resume color={active === "resume" ? "#A396F9" : "#fff"} />
+        <Resume visible={active === "resume" ? "animate" : "hidden"} />
       </button>
       <button
         onClick={() => {
           setActive("contact");
         }}
       >
-        <Contact color={active === "contact" ? "#8CEFBA" : "#fff"} />
+        <Contact visible={active === "contact" ? "animate" : "hidden"} />
       </button>
     </div>
   );
