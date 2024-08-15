@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+
 function Contact({ width = 24, height = 24, color = "#fff" }) {
   return (
     <svg
@@ -19,30 +20,77 @@ function Contact({ width = 24, height = 24, color = "#fff" }) {
   );
 }
 
-function Home({ width = 24, height = 24, color = "#FF88D7" }) {
+function Home({ color = "#FF88D7", visible }) {
+  const icon = {
+    hidden: {
+      opacity: 1,
+      pathLength: 0,
+      fill: "rgba(255, 255, 255, 0)",
+      stroke: "fff",
+      strokeWidth: 2,
+    },
+    visible: {
+      opacity: 1,
+      pathLength: 1,
+      fill: "rgba(255, 255, 255, 0)",
+      stroke: "#FF88D7",
+      strokeWidth: 2,
+    },
+  };
+
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke={color}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-      ></path>
-      <path
-        stroke={color}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M9 22V12h6v10"
-      ></path>
-    </svg>
+    <div className="container">
+      <motion.svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 25 25"
+        className="item"
+        height={25}
+        width={25}
+      >
+        <motion.path
+          d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          opacity={1}
+          pathLength={1}
+          fill="rgba(255, 255, 255, 0)"
+          stroke="#fff"
+        />
+        <motion.path
+          d="M9 22V12h6v10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          opacity={1}
+          pathLength={1}
+          fill="rgba(255, 255, 255, 0)"
+          stroke="#fff"
+        />
+        <motion.path
+          d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+          variants={icon}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial="visible"
+          animate={visible}
+          transition={{
+            default: { duration: 1, ease: "easeIn" },
+          }}
+        />
+        <motion.path
+          d="M9 22V12h6v10"
+          variants={icon}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial="visible"
+          animate={visible}
+          transition={{
+            default: { duration: 1, ease: "easeIn" },
+          }}
+        />
+      </motion.svg>
+    </div>
   );
 }
 

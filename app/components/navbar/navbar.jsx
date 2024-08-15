@@ -2,6 +2,7 @@
 import { Contact, Home, Projects, Resume, User } from "./icons";
 import styles from "./navbar.module.css";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
@@ -15,7 +16,7 @@ export default function Navbar() {
           setActive("home");
         }}
       >
-        <Home color={active === "home" ? "#FF88D7" : "#fff"} />
+        <Home visible={active === "home" ? "animate" : "hidden"} />
       </button>
       <button
         onClick={() => {
