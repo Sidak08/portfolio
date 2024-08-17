@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./desktop_home.module.css";
 import localFont from "next/font/local";
 import { useGlitch } from "react-powerglitch";
-import SectionView from ".././section/section";
+import { motion, useScroll } from "framer-motion";
 
 const myFont = localFont({
   src: "../.././fonts/cyber-reg-font.woff2",
@@ -14,11 +14,17 @@ export default function DesktopHome({ active, setActive }) {
   const glitch = useGlitch();
 
   return (
-    <SectionView
-      // className="w-full h-screen bg-[#0A0F13]"
-      id="home"
-      setActiveSection={setActive}
-      children={
+    <motion.div
+      whileInView={() => {
+        setActive("home");
+        console.log("home");
+      }}
+    >
+      <section
+        // className="w-full h-screen bg-[#0A0F13]"
+        id="home"
+        setActiveSection={setActive}
+      >
         <div className="w-full h-screen bg-[#0A0F13]">
           <div className="flex items-center justify-center w-full h-screen mb-[200px]">
             <div className="flex items-center justify-evenly w-full">
@@ -36,7 +42,7 @@ export default function DesktopHome({ active, setActive }) {
             </div>
           </div>
         </div>
-      }
-    ></SectionView>
+      </section>
+    </motion.div>
   );
 }

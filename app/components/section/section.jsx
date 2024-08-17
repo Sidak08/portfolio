@@ -12,7 +12,7 @@ export default function SectionView({
 
   React.useEffect(() => {
     if (isInView) {
-      console.log(5, id);
+      // console.log(5, id);
       setActiveSection(id);
     }
   }, [isInView, id, setActiveSection]);

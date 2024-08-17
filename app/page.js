@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function Home() {
   const [active, setActive] = useState("home");
   return (
-    <main className="w-full h-[100vh] noScroll">
+    <main className="w-full noScroll">
       <Navbar active={active} setActive={setActive} />
       <DesktopHome active={active} setActive={setActive} />
       <div className="h-screen w-full"></div>

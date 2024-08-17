@@ -10,7 +10,7 @@ export default function Navbar({ active, setActive }) {
   const router = useRouter();
   // const { scrollYProgress } = useScroll();
   useEffect(() => {
-    console.log(active);
+    console.log(1, active);
   }, [active]);
 
   return (
@@ -27,11 +27,11 @@ export default function Navbar({ active, setActive }) {
       </button>
       <button
         onClick={() => {
-          setActive("user");
+          setActive("aboutMe");
           router.push("/#about_me");
         }}
       >
-        <User visible={active === "user" ? "animate" : "hidden"} />
+        <User visible={active === "aboutMe" ? "animate" : "hidden"} />
       </button>
       <button
         onClick={() => {
