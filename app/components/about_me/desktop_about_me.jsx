@@ -1,4 +1,4 @@
-import SectionView from ".././section/section";
+// import SectionView from ".././section/section";
 import { motion, useScroll } from "framer-motion";
 
 export default function DesktopAboutMe({ active, setActive }) {
