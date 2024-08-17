@@ -11,6 +11,7 @@ export default function Home() {
     <main className="w-full h-[100vh] noScroll">
       <Navbar active={active} setActive={setActive} />
       <DesktopHome active={active} setActive={setActive} />
+      <div className="h-screen w-full"></div>
       <DesktopAboutMe active={active} setActive={setActive} />
     </main>
   );

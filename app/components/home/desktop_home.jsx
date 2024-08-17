@@ -15,23 +15,28 @@ export default function DesktopHome({ active, setActive }) {
 
   return (
     <SectionView
-      className="w-full h-screen bg-[#0A0F13]"
+      // className="w-full h-screen bg-[#0A0F13]"
       id="home"
       setActiveSection={setActive}
-    >
-      <div className="flex items-center justify-center w-full h-screen">
-        <div className="flex items-center justify-evenly w-full">
-          <div ref={glitch.ref}>
-            <Image src="/home-profile.png" height={412} width={413} />
-          </div>
-          <div className="">
-            <div className={`${styles.myName}`}>My Name </div>
-            <div className={`${myFont.className} ${styles.isSidak} mt-9 ml-32`}>
-              Is SidaK
+      children={
+        <div className="w-full h-screen bg-[#0A0F13]">
+          <div className="flex items-center justify-center w-full h-screen mb-[200px]">
+            <div className="flex items-center justify-evenly w-full">
+              <div ref={glitch.ref}>
+                <Image src="/home-profile.png" height={412} width={413} />
+              </div>
+              <div className="">
+                <div className={`${styles.myName}`}>My Name </div>
+                <div
+                  className={`${myFont.className} ${styles.isSidak} mt-9 ml-32`}
+                >
+                  Is SidaK
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </SectionView>
+      }
+    ></SectionView>
   );
 }

@@ -28,12 +28,13 @@ body {
 
 * {
     scroll-behavior: smooth;
+}
+
+.noScroll::-webkit-scrollbar {
+    display: none;
     overflow: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;
-}
-.noScroll::-webkit-scrollbar {
-    display: none;
 }
 
 @layer utilities {
