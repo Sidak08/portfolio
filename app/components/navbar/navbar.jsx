@@ -5,14 +5,13 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, useScroll } from "framer-motion";
 
-export default function Navbar() {
-  const [active, setActive] = useState("home");
+export default function Navbar({ active, setActive }) {
+  // const [active, setActive] = useState("home");
   const router = useRouter();
-  const { scrollYProgress } = useScroll();
-
+  // const { scrollYProgress } = useScroll();
   useEffect(() => {
-    console.log(scrollYProgress);
-  }, [scrollYProgress]);
+    console.log(active);
+  }, [active]);
 
   return (
     <div

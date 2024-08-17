@@ -1,7 +1,12 @@
-export default function DesktopAboutMe() {
+import SectionView from ".././section/section";
+export default function DesktopAboutMe({ active, setActive }) {
   return (
-    <div className="w-full h-screen bg-[#0A0F13]" id="about_me">
+    <SectionView
+      className="w-full h-screen bg-[#0A0F13]"
+      id="about_me"
+      setActive
+    >
       <div></div>
-    </div>
+    </SectionView>
   );
 }

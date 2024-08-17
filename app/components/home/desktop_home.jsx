@@ -3,17 +3,22 @@ import Image from "next/image";
 import styles from "./desktop_home.module.css";
 import localFont from "next/font/local";
 import { useGlitch } from "react-powerglitch";
+import SectionView from ".././section/section";
 
 const myFont = localFont({
   src: "../.././fonts/cyber-reg-font.woff2",
   display: "swap",
 });
 
-export default function DesktopHome() {
+export default function DesktopHome({ active, setActive }) {
   const glitch = useGlitch();
 
   return (
-    <section className="w-full h-screen bg-[#0A0F13]" id="home">
+    <SectionView
+      className="w-full h-screen bg-[#0A0F13]"
+      id="home"
+      setActiveSection={setActive}
+    >
       <div className="flex items-center justify-center w-full h-screen">
         <div className="flex items-center justify-evenly w-full">
           <div ref={glitch.ref}>
@@ -27,6 +32,6 @@ export default function DesktopHome() {
           </div>
         </div>
       </div>
-    </section>
+    </SectionView>
   );
 }
