@@ -17,7 +17,7 @@ const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 function Box({ text, img }) {
   return (
     <div
-      className={`inline-flex justify-evenly items-center bg-[#0c2029] rounded-[4px] p-2 max-w-sm ${sarpanch.className}`}
+      className={`inline-flex justify-evenly items-center bg-[#0c2029] rounded-[4px] p-2 max-w-sm mx-2 ${sarpanch.className}`}
     >
       <h3 className="text-white text-3xl font-normal font-['Sarpanch']">
         {text}
@@ -27,7 +27,7 @@ function Box({ text, img }) {
   );
 }
 
-function ParallaxText({ children, baseVelocity = 100 }) {
+function ParallaxTextOne({ baseVelocity = 100 }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -62,18 +62,12 @@ function ParallaxText({ children, baseVelocity = 100 }) {
   return (
     <div className={styles.parallax}>
       <motion.div className={styles.scroller} style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+        <Box text="Javascript" img="/logos/js.png" />
+        <Box text="Typescript" img="/logos/ts.png" />
+        <Box text="Python" img="/logos/python.png" />
+        <Box text="MongoDB" img="/logos/mongoDb.png" />
+        <Box text="SQL" img="/logos/mySQL.png" />
+        <Box text="Tensor-flow" img="/logos/tensorflow.png" />
       </motion.div>
     </div>
   );
@@ -82,10 +76,8 @@ function ParallaxText({ children, baseVelocity = 100 }) {
 export default function SkillScroll() {
   return (
     <section>
-      <ParallaxText baseVelocity={-5}>
-        <Box text="Javascript" img="/logos/js.png" />
-      </ParallaxText>
-      <ParallaxText baseVelocity={5}>Scroll velocity</ParallaxText>
+      <ParallaxTextOne baseVelocity={-5} />
+      <ParallaxTextOne baseVelocity={5}>Scroll velocity</ParallaxTextOne>
       <Box text="Javascript" img="/logos/js.png" />
     </section>
   );
