@@ -3,20 +3,20 @@ import { motion, useScroll } from "framer-motion";
 
 export default function DesktopAboutMe({ active, setActive }) {
   return (
-    <motion.div
-      whileInView={() => {
-        if (active !== "aboutMe") {
-          setActive((pre) => "aboutMe");
-        }
-        // setActive((pre) => {
-        //   return pre === "aboutMe" ? pre : "aboutMe";
-        // });
-        // console.log(active);
-      }}
-    >
-      <section id="about_me">
-        <div className="w-full h-[110vh] bg-[#0A0F13]"></div>
-      </section>
-    </motion.div>
+    <section id="about_me" className="relative">
+      <motion.div
+        whileInView={() => {
+          if (active !== "aboutMe") {
+            setActive((pre) => "aboutMe");
+          }
+          // setActive((pre) => {
+          //   return pre === "aboutMe" ? pre : "aboutMe";
+          // });
+          // console.log(active);
+        }}
+        className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
+      ></motion.div>
+      <div className="w-full h-[110vh] bg-[#0A0F13]"></div>
+    </section>
   );
 }

@@ -15,7 +15,7 @@ export default function Navbar({ active, setActive }) {
 
   return (
     <div
-      className={`w-[400px] h-[50px] ${styles.navBarBox} absolute bottom-10 flex items-center justify-evenly`}
+      className={`w-[400px] h-[50px] ${styles.navBarBox} absolute bottom-10 flex items-center justify-evenly z-10`}
     >
       <button
         onClick={() => {
