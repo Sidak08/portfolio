@@ -137,23 +137,90 @@ function ParallaxTextTwo({ baseVelocity = 100 }) {
   return (
     <div className={styles.parallax}>
       <motion.div className={styles.scroller} style={{ x }}>
-        <Box text="Javascript" img="/logos/js.png" />
-        <Box text="Javascript" img="/logos/js.png" />
-        <Box text="Typescript" img="/logos/ts.png" />
-        <Box text="Python" img="/logos/python.png" />
-        <Box text="MongoDB" img="/logos/mongoDb.png" />
-        <Box text="SQL" img="/logos/mySQL.png" />
-        <Box text="Tensor-flow" img="/logos/tensorflow.png" />
-        <Box text="Next JS" img="/logos/nextJs.png" />
-        <Box text="React" img="/logos/react.png" />
-        <Box text="Javascript" img="/logos/js.png" />
-        <Box text="Typescript" img="/logos/ts.png" />
-        <Box text="Python" img="/logos/python.png" />
-        <Box text="MongoDB" img="/logos/mongoDb.png" />
-        <Box text="SQL" img="/logos/mySQL.png" />
-        <Box text="Tensor-flow" img="/logos/tensorflow.png" />
-        <Box text="Next JS" img="/logos/nextJs.png" />
-        <Box text="React" img="/logos/react.png" />
+        <Box text="React Native" img="/logos/react.png" />
+        <Box text="React Native" img="/logos/react.png" />
+        <Box text="Expo" img="/logos/expo.png" />
+        <Box text="Tailwind" img="/logos/tailwind.png" />
+        <Box text="Node Js" img="/logos/nodeJs.png" />
+        <Box text="Material Ui" img="/logos/materialUi.png" />
+        <Box text="Auth0" img="/logos/auth0.png" />
+        <Box text="Stripe" img="/logos/stripe.png" />
+        <Box text="Media Pipe" img="/logos/mediaPipe.png" />
+        <Box text="React Native" img="/logos/react.png" />
+        <Box text="Expo" img="/logos/expo.png" />
+        <Box text="Tailwind" img="/logos/tailwind.png" />
+        <Box text="Node Js" img="/logos/nodeJs.png" />
+        <Box text="Material Ui" img="/logos/materialUi.png" />
+        <Box text="Auth0" img="/logos/auth0.png" />
+        <Box text="Stripe" img="/logos/stripe.png" />
+        <Box text="Media Pipe" img="/logos/mediaPipe.png" />
+        <Box text="React Native" img="/logos/react.png" />
+      </motion.div>
+    </div>
+  );
+}
+
+function ParallaxTextThree({ baseVelocity = 100 }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
+
+  // Magic wrapping for the length of the text
+  const x = useTransform(baseX, (v) => `${wrap(-20, -40, v)}%`);
+
+  const directionFactor = useRef(1);
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+    // Change the direction of the scroll once we switch scrolling directions
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+    const newBaseX = baseX.get() + moveBy;
+
+    // Invert the direction when baseX reaches -20 or -40
+    if (newBaseX <= -20 || newBaseX >= -40) {
+      directionFactor.current *= -1;
+    }
+
+    baseX.set(newBaseX);
+    console.log(baseX.get());
+  });
+
+  // The number of times to repeat the child text should be dynamically calculated
+  return (
+    <div className={styles.parallax}>
+      <motion.div className={styles.scroller} style={{ x }}>
+        <Box text="Three Js" img="/logos/threeJs.png" />
+        <Box text="Three Js" img="/logos/threeJs.png" />
+        <Box text="Puppeteer" img="/logos/puppeteer.png" />
+        <Box text="Insomnia" img="/logos/insomnia.png" />
+        <Box text="Git" img="/logos/git.png" />
+        <Box text="NPM" img="/logos/npm.png" />
+        <Box text="AWS" img="/logos/aws.png" />
+        <Box text="Vercel" img="/logos/vercel.png" />
+        <Box text="Amplify" img="/logos/amplify.png" />
+        <Box text="Three Js" img="/logos/threeJs.png" />
+        <Box text="Puppeteer" img="/logos/puppeteer.png" />
+        <Box text="Insomnia" img="/logos/insomnia.png" />
+        <Box text="Git" img="/logos/git.png" />
+        <Box text="NPM" img="/logos/npm.png" />
+        <Box text="AWS" img="/logos/aws.png" />
+        <Box text="Vercel" img="/logos/vercel.png" />
+        <Box text="Amplify" img="/logos/amplify.png" />
+        <Box text="Three Js" img="/logos/threeJs.png" />
       </motion.div>
     </div>
   );
@@ -163,8 +230,8 @@ export default function SkillScroll() {
   return (
     <section className="w-full">
       <ParallaxTextOne baseVelocity={-5} />
-      <ParallaxTextOne baseVelocity={5}>Scroll velocity</ParallaxTextOne>
-      <Box text="Javascript" img="/logos/js.png" />
+      <ParallaxTextTwo baseVelocity={5} />
+      <ParallaxTextThree baseVelocity={-5} />
     </section>
   );
 }
