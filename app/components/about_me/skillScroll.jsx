@@ -1,0 +1,92 @@
+import styles from "./desktop_about_me.module.css";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useVelocity,
+  useAnimationFrame,
+} from "framer-motion";
+import { wrap } from "@motionone/utils";
+import { Sarpanch } from "next/font/google";
+
+const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
+
+function Box({ text, img }) {
+  return (
+    <div
+      className={`inline-flex justify-evenly items-center bg-[#0c2029] rounded-[4px] p-2 max-w-sm ${sarpanch.className}`}
+    >
+      <h3 className="text-white text-3xl font-normal font-['Sarpanch']">
+        {text}
+      </h3>
+      <img src={img} alt={text} height={30} width={30} className="ml-3" />
+    </div>
+  );
+}
+
+function ParallaxText({ children, baseVelocity = 100 }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
+
+  // Magic wrapping for the length of the text
+  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+
+  const directionFactor = useRef(1);
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+    // Change the direction of the scroll once we switch scrolling directions
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  // The number of times to repeat the child text should be dynamically calculated
+  return (
+    <div className={styles.parallax}>
+      <motion.div className={styles.scroller} style={{ x }}>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+        <span>{children} </span>
+      </motion.div>
+    </div>
+  );
+}
+
+export default function SkillScroll() {
+  return (
+    <section>
+      <ParallaxText baseVelocity={-5}>
+        <Box text="Javascript" img="/logos/js.png" />
+      </ParallaxText>
+      <ParallaxText baseVelocity={5}>Scroll velocity</ParallaxText>
+      <Box text="Javascript" img="/logos/js.png" />
+    </section>
+  );
+}
