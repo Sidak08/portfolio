@@ -1,5 +1,5 @@
 import "./styles.css";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 
 function Item() {
@@ -8,6 +8,14 @@ function Item() {
     target: ref,
     offset: ["end end", "start start"],
   });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log(7, scrollYProgress.get());
+    }, 10);
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, [scrollYProgress]);
 
   return (
     <section>
@@ -33,17 +41,6 @@ function Item() {
 export default function Scroll() {
   return (
     <>
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
       <Item />
     </>
   );

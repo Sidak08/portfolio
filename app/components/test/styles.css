@@ -1,4 +1,4 @@
-body {
+/* body {
     --black: #000000;
     --ash-black: #222;
     --white: #fafafa;
@@ -102,7 +102,7 @@ code {
     font-family: input-mono, monospace;
     font-weight: 400;
     font-style: normal;
-}
+} */
 
 .progress {
     position: sticky;
@@ -132,7 +132,7 @@ circle {
     stroke: var(--accent);
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     height: 12px;
     width: 5px;
     background: var(--background);
@@ -159,4 +159,4 @@ section div {
     height: 300px;
     border: 2px dotted var(--accent);
     position: relative;
-}
+} */
