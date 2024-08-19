@@ -13,7 +13,7 @@ export default function DesktopAboutMe({ active, setActive }) {
         }}
         className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
-      <div className="w-full h-[110vh] bg-[#0A0F13]">
+      <div className="w-full h-screen bg-[#0A0F13]">
         <SkillScroll />
       </div>
     </section>

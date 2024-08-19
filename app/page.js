@@ -5,6 +5,7 @@ import DesktopAboutMe from "./components/about_me/desktop_about_me";
 import Navbar from "./components/navbar/navbar";
 import SideScroll from "./components/test/sideScroll";
 import { useState } from "react";
+import "./globals.css";
 
 export default function Home() {
   const [active, setActive] = useState("home");
@@ -16,4 +17,3 @@ export default function Home() {
     </main>
   );
 }
-// <div className="h-[110vh] w-full"></div>;

@@ -30,11 +30,14 @@ body {
     scroll-behavior: smooth;
 }
 
-.noScroll::-webkit-scrollbar {
-    display: none;
+.noScroll {
     overflow: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;
+    scrollbar-width: none !important; /* For Firefox */
+    -ms-overflow-style: none !important; /* For Internet Explorer and Edge */
+}
+.noScroll::-webkit-scrollbar {
+    width: 0 !important;
+    display: none !important;
 }
 
 @layer utilities {

@@ -1,17 +1,17 @@
 "use client";
-import styles from "./desktop_about_me.module.css";
-import { useRef, useState, useEffect } from "react";
+import { wrap } from "@motionone/utils";
 import {
   motion,
+  useAnimationFrame,
+  useMotionValue,
   useScroll,
   useSpring,
   useTransform,
-  useMotionValue,
   useVelocity,
-  useAnimationFrame,
 } from "framer-motion";
-import { wrap } from "@motionone/utils";
 import { Sarpanch } from "next/font/google";
+import { useEffect, useRef, useState } from "react";
+import styles from "./desktop_about_me.module.css";
 
 const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
@@ -45,7 +45,7 @@ function Box({ text, img }) {
   );
 }
 
-function ParallaxTextOne({ baseVelocity = 100 }) {
+function ParallaxTextOne({ baseVelocity = 100, speed }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -58,7 +58,12 @@ function ParallaxTextOne({ baseVelocity = 100 }) {
   });
 
   // Magic wrapping for the length of the text
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+  const x = useTransform(baseX, (v) => {
+    const amplitude = 10; // Half the range of your oscillation
+    const midpoint = -30; // Midpoint of the range (-20 and -40)
+    const frequency = speed; // Adjust this to slow down the oscillation
+    return `${midpoint + amplitude * Math.sin(v * frequency)}%`;
+  });
 
   const directionFactor = useRef(1);
   useAnimationFrame((t, delta) => {
@@ -102,7 +107,7 @@ function ParallaxTextOne({ baseVelocity = 100 }) {
   );
 }
 
-function ParallaxTextTwo({ baseVelocity = 100 }) {
+function ParallaxTextTwo({ baseVelocity = 100, speed }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -115,7 +120,12 @@ function ParallaxTextTwo({ baseVelocity = 100 }) {
   });
 
   // Magic wrapping for the length of the text
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+  const x = useTransform(baseX, (v) => {
+    const amplitude = 10; // Half the range of your oscillation
+    const midpoint = -30; // Midpoint of the range (-20 and -40)
+    const frequency = speed; // Adjust this to slow down the oscillation
+    return `${midpoint + amplitude * Math.sin(v * frequency)}%`;
+  });
 
   const directionFactor = useRef(1);
   useAnimationFrame((t, delta) => {
@@ -160,7 +170,7 @@ function ParallaxTextTwo({ baseVelocity = 100 }) {
   );
 }
 
-function ParallaxTextThree({ baseVelocity = 100 }) {
+function ParallaxTextThree({ baseVelocity = 100, speed }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -173,9 +183,15 @@ function ParallaxTextThree({ baseVelocity = 100 }) {
   });
 
   // Magic wrapping for the length of the text
-  const x = useTransform(baseX, (v) => `${wrap(-20, -40, v)}%`);
+  const x = useTransform(baseX, (v) => {
+    const amplitude = 10; // Half the range of your oscillation
+    const midpoint = -30; // Midpoint of the range (-20 and -40)
+    const frequency = speed; // Adjust this to slow down the oscillation
+    return `${midpoint + amplitude * Math.sin(v * frequency)}%`;
+  });
 
   const directionFactor = useRef(1);
+
   useAnimationFrame((t, delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
@@ -188,15 +204,8 @@ function ParallaxTextThree({ baseVelocity = 100 }) {
 
     moveBy += directionFactor.current * moveBy * velocityFactor.get();
 
-    const newBaseX = baseX.get() + moveBy;
-
-    // Invert the direction when baseX reaches -20 or -40
-    if (newBaseX <= -20 || newBaseX >= -40) {
-      directionFactor.current *= -1;
-    }
-
-    baseX.set(newBaseX);
-    console.log(baseX.get());
+    baseX.set(baseX.get() + moveBy);
+    // console.log(baseX.get());
   });
 
   // The number of times to repeat the child text should be dynamically calculated
@@ -227,11 +236,13 @@ function ParallaxTextThree({ baseVelocity = 100 }) {
 }
 
 export default function SkillScroll() {
+  const speed = 0.15;
+
   return (
     <section className="w-full">
-      <ParallaxTextOne baseVelocity={-5} />
-      <ParallaxTextTwo baseVelocity={5} />
-      <ParallaxTextThree baseVelocity={-5} />
+      <ParallaxTextOne baseVelocity={-5} speed={speed} />
+      <ParallaxTextTwo baseVelocity={5} speed={speed} />
+      <ParallaxTextThree baseVelocity={-5} speed={speed} />
     </section>
   );
 }
