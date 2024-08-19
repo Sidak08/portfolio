@@ -10,7 +10,7 @@ import "./globals.css";
 export default function Home() {
   const [active, setActive] = useState("home");
   return (
-    <main className="w-full noScroll">
+    <main className="w-full noScroll relative">
       <Navbar active={active} setActive={setActive} />
       <DesktopHome active={active} setActive={setActive} />
       <DesktopAboutMe active={active} setActive={setActive} />
