@@ -4,6 +4,9 @@ import { motion, useScroll } from "framer-motion";
 import SkillScroll from "./skillScroll";
 import { useState, useEffect, useRef } from "react";
 import Typewriter from "typewriter-effect";
+import { Sarpanch } from "next/font/google";
+
+const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
 export default function DesktopAboutMe({ active, setActive }) {
   const ref = useRef(null);
@@ -29,7 +32,7 @@ export default function DesktopAboutMe({ active, setActive }) {
   }, [scrollYProgress, startTypewriter]);
 
   return (
-    <section id="about_me" className="relative">
+    <section id="about_me" className={`relative ${sarpanch.className}`}>
       <motion.div
         whileInView={() => {
           if (active !== "aboutMe") {
@@ -43,8 +46,8 @@ export default function DesktopAboutMe({ active, setActive }) {
         <div className="flex items-center justify-evenly">
           <div
             ref={ref}
-            className={`rounded-[12px] bg-[#0A1920] w-[50%] h-[430px] mt-12 transition-shadow duration-500 ease-in-out ${
-              scrollPos > 0.2
+            className={`px-8 py-4 leading-[1.8] text-2xl flex items-center justify-center rounded-[12px] bg-[#0A1920] w-[50%] min-h-[430px] mt-12 transition-shadow duration-500 ease-in-out ${
+              scrollPos > 0.1
                 ? "shadow-[25px_25px_0_0_#7DCDFD] hover:shadow-[25px_25px_0_0_#7DFDF4]"
                 : ""
             }`}
@@ -53,12 +56,16 @@ export default function DesktopAboutMe({ active, setActive }) {
               <Typewriter
                 onInit={(typewriter) => {
                   typewriter
-                    .typeString("Hello World!")
+                    .typeString(
+                      "Bonjour, I'm a Grade 11 high school student with a passion for programming. I love diving into code; exploring new technologies, and I am always eager to learn and improve my skills. Whether it's building web applications, experimenting with new frameworks, or debugging a machine learning algorithm, I find joy in every part of the process. In my free time, I enjoy working on personal and open-source projects. I also love attending hackathons and have won 2 so far. Furthermore, I also love many sports, such as badminton, soccer, and cricket.",
+                    )
                     .callFunction(() => {
                       console.log("String typed out!");
                     })
-
                     .start();
+                }}
+                options={{
+                  delay: 45, // Set typing speed to 30ms per character
                 }}
               />
             )}
