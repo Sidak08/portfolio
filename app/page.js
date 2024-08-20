@@ -4,7 +4,7 @@ import DesktopHome from "./components/home/desktop_home";
 import DesktopAboutMe from "./components/about_me/desktop_about_me";
 import Navbar from "./components/navbar/navbar";
 import SideScroll from "./components/test/sideScroll";
-import Projects from "./components/projects/projects";
+import Projects from "./components/projects/desktop_projects";
 import { useState } from "react";
 import "./globals.css";
 
