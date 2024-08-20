@@ -2,8 +2,16 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import { Sarpanch } from "next/font/google";
-const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 import styles from "./projects.module.css";
+import localFont from "next/font/local";
+import Image from "next/image";
+
+const filledText = localFont({
+  src: "../.././fonts/cyber-reg-font.woff2",
+  display: "swap",
+});
+
+const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
 export default function Projects({ active, setActive }) {
   const icons = {
@@ -82,6 +90,7 @@ export default function Projects({ active, setActive }) {
           text: "figma",
         },
       ],
+      color: "#cf2f97",
     },
   ];
   return (
@@ -94,13 +103,39 @@ export default function Projects({ active, setActive }) {
         }}
         className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
-      <div className="w-full min-h-screen bg-[#0A0F13] flex flex-col items-center justify-between">
+      <div className="w-full min-h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
         <div className="w-full h-[50px]">
           <h1 className={`${styles.hollowText} ml-20`}>Projects</h1>
         </div>
+        <Project info={projects[0]} />
       </div>
     </section>
   );
 }
 
-const Project = ({ title, description, image, icons, links }) => {};
+const Project = ({ info }) => {
+  console.log(`shadow-[-10px_-10px_2_0_${info.color}]`);
+  // shadow-[-10px_-10px_2_0_${info.color}] shadow-[25px_25px_0_0_#7DCDFD] shadow-[-10px_-10px_2_0_#CF297]
+  return (
+    <div
+      className={`shadow-[-10px_-10px_0_0_${info.color}]  bg-[#0a1920] rounded-xl w-[90%] min-h-[460px] flex flex-col items-center justify-evenly `}
+    >
+      <div
+        className={`w-full ml-16 color-[${info.color}]  text-[3.125rem] leading-[normal] ${filledText.className}`}
+        style={{ color: info.color }}
+      >
+        <h5>{info.title}</h5>
+      </div>
+      <div className="flex items-center justify-evenly">
+        <Image src={info.image} width={500} height={350} alt={info.title} />
+        <h4
+          className={`w-[50%] text-white text-[1.375rem] leading-[1.8] ${sarpanch.className}`}
+        >
+          {info.description}
+        </h4>
+      </div>
+    </div>
+  );
+};
+
+import React from "react";
