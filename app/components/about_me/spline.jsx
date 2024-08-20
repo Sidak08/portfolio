@@ -1,30 +1,52 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Spline from "@splinetool/react-spline";
 
-export default function SplineVie() {
-  const splineRef = useRef();
+export default function App() {
+  // const splineRef = useRef(null);
+  // const textObjects = useRef([]);
 
-  // const handleLoad = (splineApp) => {
-  //   const scene = splineApp.scene;
+  // function onLoad(spline) {
+  //   splineRef.current = spline;
 
-  //   // Find the text object and camera in the scene
-  //   const textObject = scene.getObjectByName("Text 4");
-  //   const camera = scene.getObjectByName("PerspectiveCamera"); // Replace 'CameraName' with your actual camera name
+  //   // Find all text objects by name
+  //   textObjects.current = [
+  //     spline.findObjectByName("Text"),
+  //     spline.findObjectByName("Text 2"),
+  //     spline.findObjectByName("Text 3"),
+  //     spline.findObjectByName("Text 4"),
+  //     // Add more text objects as needed
+  //   ];
 
-  //   if (textObject && camera) {
-  //     const animate = () => {
-  //       textObject.lookAt(camera.position);
-  //       requestAnimationFrame(animate);
-  //     };
+  //   // Listen to cursor movement
+  //   document.addEventListener("mousemove", onMouseMove);
+  // }
 
-  //     animate();
-  //   }
-  // };
+  // function onMouseMove(event) {
+  //   const { clientX, clientY } = event;
+
+  //   console.log(clientX, clientY);
+
+  //   // Update the lookAt for each text object
+  //   textObjects.current.forEach((textObj) => {
+  //     if (textObj) {
+  //       textObj.lookAt(clientX, clientY, 0);
+  //     }
+  //   });
+  // }
+
+  // // Cleanup event listener when component unmounts
+  // useEffect(() => {
+  //   return () => {
+  //     document.removeEventListener("mousemove", onMouseMove);
+  //   };
+  // }, []);
 
   return (
-    <Spline
-      scene="https://prod.spline.design/Iqam3spY2vG9EPfB/scene.splinecode"
-      className="w-full"
-    />
+    <>
+      <Spline
+        scene="https://prod.spline.design/Iqam3spY2vG9EPfB/scene.splinecode"
+        className="w-full"
+      />
+    </>
   );
 }
