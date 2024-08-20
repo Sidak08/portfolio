@@ -51,7 +51,7 @@ export default function Projects({ active, setActive }) {
       icons: [
         icons.js,
         icons.mongoDb,
-        icons.next,
+        icons.nextJs,
         icons.tailwind,
         icons.react,
         icons.stripe,
@@ -114,14 +114,14 @@ export default function Projects({ active, setActive }) {
 }
 
 const Project = ({ info }) => {
-  console.log(`shadow-[-10px_-10px_2_0_${info.color}]`);
-  // shadow-[-10px_-10px_2_0_${info.color}] shadow-[25px_25px_0_0_#7DCDFD] shadow-[-10px_-10px_2_0_#CF297]
+  console.log(`shadow-[-10px_-10px_0_0_${info.color}]`);
+  //shadow-[25px_25px_0_0_#7DCDFD]
   return (
     <div
-      className={`shadow-[-10px_-10px_0_0_${info.color}]  bg-[#0a1920] rounded-xl w-[90%] min-h-[460px] flex flex-col items-center justify-evenly `}
+      className={`shadow-[-10px_-10px_0_0_${info.color}] py-6 bg-[#0a1920] rounded-xl w-[90%] max-w-[1500px] min-h-[460px] flex flex-col items-center justify-evenly `}
     >
       <div
-        className={`w-full ml-16 color-[${info.color}]  text-[3.125rem] leading-[normal] ${filledText.className}`}
+        className={`w-full ml-16 color-[${info.color}] mb-6 text-[3.125rem] leading-[normal] ${filledText.className}`}
         style={{ color: info.color }}
       >
         <h5>{info.title}</h5>
@@ -133,6 +133,13 @@ const Project = ({ info }) => {
         >
           {info.description}
         </h4>
+      </div>
+      <div className="flex items-center justify-between mx-8 w-full mt-8">
+        <div className="flex items-center justify-evenly w-[50%]">
+          {info.icons.map((icon, index) => (
+            <img src={icon} className="h-[35px]" key={index} />
+          ))}
+        </div>
       </div>
     </div>
   );
