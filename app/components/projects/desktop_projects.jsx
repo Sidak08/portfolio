@@ -114,11 +114,17 @@ export default function Projects({ active, setActive }) {
 }
 
 const Project = ({ info }) => {
-  console.log(`shadow-[-10px_-10px_0_0_${info.color}]`);
-  //shadow-[25px_25px_0_0_#7DCDFD]
+  console.log(info.color);
+  //#cf2f97
+  const shadow = "shadow-[-10px_-10px_0_0_" + info.color + "]";
+  console.log(shadow);
+
+  //shadow-[-10px_-10px_0_0_#cf2f97] this is value from the console log and does not work
+  //shadow-[-10px_-10px_0_0_#cf2f97] this is the value that works
+
   return (
     <div
-      className={`shadow-[-10px_-10px_0_0_${info.color}] py-6 bg-[#0a1920] rounded-xl w-[90%] max-w-[1500px] min-h-[460px] flex flex-col items-center justify-evenly `}
+      className={`${shadow} py-6 bg-[#0a1920] rounded-xl w-[90%] max-w-[1500px] min-h-[460px] flex flex-col items-center justify-evenly`}
     >
       <div
         className={`w-full ml-16 color-[${info.color}] mb-6 text-[3.125rem] leading-[normal] ${filledText.className}`}
