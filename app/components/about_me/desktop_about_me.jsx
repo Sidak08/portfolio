@@ -5,6 +5,7 @@ import SkillScroll from "./skillScroll";
 import { useState, useEffect, useRef } from "react";
 import Typewriter from "typewriter-effect";
 import { Sarpanch } from "next/font/google";
+import SplineView from "./spline";
 
 const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
@@ -69,6 +70,9 @@ export default function DesktopAboutMe({ active, setActive }) {
                 }}
               />
             )}
+          </div>
+          <div>
+            <SplineView />
           </div>
           <div className="w-[40%] h-[430px]"></div>
         </div>
