@@ -71,9 +71,7 @@ export default function DesktopAboutMe({ active, setActive }) {
               />
             )}
           </div>
-          <div className="w-[40%] h-[430px]">
-            <SplineView />
-          </div>
+          <div className="w-[40%] h-[430px]"></div>
         </div>
       </div>
     </section>
