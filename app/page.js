@@ -14,6 +14,7 @@ export default function Home() {
       <Navbar active={active} setActive={setActive} />
       <DesktopHome active={active} setActive={setActive} />
       <DesktopAboutMe active={active} setActive={setActive} />
+      <div className="h-screen w-full"></div>
     </main>
   );
 }

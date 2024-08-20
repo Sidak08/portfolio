@@ -11,6 +11,8 @@
   "dependencies": {
     "@motionone/utils": "^10.18.0",
     "@splinetool/react-spline": "^4.0.0",
+    "@splinetool/runtime": "^1.9.17",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "framer-motion": "^11.3.27",
     "next": "14.2.5",
     "react": "^18",
