@@ -64,28 +64,28 @@ export default function Projects({ active, setActive }) {
         {
           aval: true,
           type: "video",
-          icons: "./project_logos/youtube",
+          icons: "/project_logos/youtube.png",
           link: "",
           text: "Demo",
         },
         {
           aval: true,
           type: "github",
-          icons: "./project_logos/github",
+          icons: "/project_logos/github.png",
           link: "",
           text: "Github",
         },
         {
           aval: true,
           type: "website",
-          icons: "./project_logos/external_link",
+          icons: "/project_logos/external_link.png",
           link: "",
           text: "bestseat.study",
         },
         {
-          aval: true,
+          aval: false,
           type: "figma",
-          icons: "./project_logos/figma",
+          icons: "/project_logos/figma",
           link: "",
           text: "figma",
         },
@@ -114,40 +114,70 @@ export default function Projects({ active, setActive }) {
 }
 
 const Project = ({ info }) => {
-  console.log(info.color);
-  //#cf2f97
-  const shadow = "shadow-[-10px_-10px_0_0_" + info.color + "]";
-  console.log(shadow);
+  // const shadow = "shadow-[-10px_-10px_0_0_" + info.color + "]";
 
-  //shadow-[-10px_-10px_0_0_#cf2f97] this is value from the console log and does not work
-  //shadow-[-10px_-10px_0_0_#cf2f97] this is the value that works
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["end end", "start start"],
+  });
+
+  const [scrollPos, setScrollPos] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setScrollPos(scrollYProgress.get());
+
+      console.log(scrollYProgress.get());
+    }, 10);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
-    <div
-      className={`${shadow} py-6 bg-[#0a1920] rounded-xl w-[90%] max-w-[1500px] min-h-[460px] flex flex-col items-center justify-evenly`}
-    >
+    <>
+      <div className={`w-[${scrollPos}%] h-[10px] bg-[${info.color}]`} />
       <div
-        className={`w-full ml-16 color-[${info.color}] mb-6 text-[3.125rem] leading-[normal] ${filledText.className}`}
-        style={{ color: info.color }}
+        className={` py-6 bg-[#0a1920] rounded-xl w-[90%] max-w-[1500px] min-h-[460px] flex flex-col items-center justify-evenly`}
+        ref={ref}
       >
-        <h5>{info.title}</h5>
-      </div>
-      <div className="flex items-center justify-evenly">
-        <Image src={info.image} width={500} height={350} alt={info.title} />
-        <h4
-          className={`w-[50%] text-white text-[1.375rem] leading-[1.8] ${sarpanch.className}`}
+        <div
+          className={`w-full ml-16 color-[${info.color}] mb-6 text-[3.125rem] leading-[normal] ${filledText.className}`}
+          style={{ color: info.color }}
         >
-          {info.description}
-        </h4>
-      </div>
-      <div className="flex items-center justify-between mx-8 w-full mt-8">
-        <div className="flex items-center justify-evenly w-[50%]">
-          {info.icons.map((icon, index) => (
-            <img src={icon} className="h-[35px]" key={index} />
-          ))}
+          <h5>{info.title}</h5>
+        </div>
+        <div className="flex items-center justify-evenly">
+          <Image src={info.image} width={500} height={350} alt={info.title} />
+          <h4
+            className={`w-[50%] text-white text-[1.375rem] leading-[1.8] ${sarpanch.className}`}
+          >
+            {info.description}
+          </h4>
+        </div>
+        <div className="flex items-center justify-between mx-8 w-full mt-8">
+          <div className="flex items-center justify-evenly w-[60%]">
+            {info.icons.map((icon, index) => (
+              <img src={icon} className="h-[35px]" key={index} />
+            ))}
+          </div>
+          <div className="flex items-center justify-evenly w-[50%]">
+            {info.links.map((link, index) => {
+              if (link.aval) {
+                return (
+                  <a href={link.link} key={index} className="flex items-end">
+                    <img src={link.icons} className="h-[30px] mr-5" />
+                    <h3 className="text-white text-[25px] font-normal underline">
+                      {link.text}
+                    </h3>
+                  </a>
+                );
+              }
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
