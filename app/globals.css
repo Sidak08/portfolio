@@ -45,3 +45,8 @@ body {
         text-wrap: balance;
     }
 }
+
+main {
+    /* Ensures the content doesn't exceed the viewport height */
+    overflow-y: auto; /* This can be kept to allow scrolling */
+}

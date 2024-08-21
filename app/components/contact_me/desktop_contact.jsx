@@ -30,22 +30,48 @@ export default function DesktopContact({ active, setActive }) {
 
       <div className="w-full h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
         <h1 className={styles.hollowText}>Contact Me</h1>
-        <div className="max-w-[1200px] w-[80%] min-h-[500px] rounded-xl bg-[#0A1920] flex flex-col items-start justify-evenly">
+        <div className="max-w-[1200px] w-[80%] min-h-[500px] rounded-xl bg-[#0A1920] flex flex-col items-start justify-evenly relative">
           <Text
             text="SidakSingh318@gmail.com"
             link="mailto:sidaksingh318@gmail.com"
             Icon={Email}
           />
-          <Text text="+1 (647) 405-7022" link={"#"} Icon={Phone} />
-          <Text text="Brampton, Ontario Canada" link={"#"} Icon={Address} />
-          <Text text="Sidak.works" link={"#"} Icon={ExternalLink} />
-          <Text text="github.com/Sidak08" link={"#"} Icon={Github} />
+          <Text
+            text="+1 (647) 405-7022"
+            link={"tel:+16474057022"}
+            Icon={Phone}
+          />
+          <Text
+            text="Brampton, Ontario Canada"
+            link={"https://maps.app.goo.gl/8xGw1R14q4oMu2Ds7"}
+            Icon={Address}
+          />
+          <Text
+            text="Sidak.works"
+            link={"https://sidak.works/"}
+            Icon={ExternalLink}
+          />
+          <Text
+            text="github.com/Sidak08"
+            link={"https://github.com/Sidak08"}
+            Icon={Github}
+          />
           <Text
             text="linkedin.com/in/sidak-singh-9812a42a3/"
-            link={"#"}
+            link={"https://linkedin.com/in/sidak-singh-9812a42a3/"}
             Icon={Linkedin}
           />
-          <Text text="devpost.com/sidaksingh318" link={"#"} Icon={Devpost} />
+          <Text
+            text="devpost.com/sidaksingh318"
+            link={"https://devpost.com/sidaksingh318"}
+            Icon={Devpost}
+          />
+          <Image
+            src={"/contact.png"}
+            width={600}
+            height={650}
+            className="absolute bottom-0 right-[-150px]"
+          />
         </div>
       </div>
     </section>
@@ -55,20 +81,33 @@ export default function DesktopContact({ active, setActive }) {
 const Text = ({ text, link, Icon }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [iconColor, setIconColor] = useState("#fff");
+  const [textColor, setTextColor] = useState("#fff");
 
   useEffect(() => {
-    let timeout;
+    let iconTimeout, textTimeout;
+
     if (isHovered) {
-      timeout = setTimeout(() => {
+      iconTimeout = setTimeout(() => {
         setIconColor("#8CEFBA");
-      }, 300); // Delay of 300ms
+      }, 300); // Delay of 300ms for icon
+
+      textTimeout = setTimeout(() => {
+        setTextColor("#8CEFBA");
+      }, 300); // Delay of 300ms for text
     } else {
-      timeout = setTimeout(() => {
+      iconTimeout = setTimeout(() => {
         setIconColor("#fff");
-      }, 300); // Delay of 300ms
+      }, 300); // Delay of 300ms for icon
+
+      textTimeout = setTimeout(() => {
+        setTextColor("#fff");
+      }, 300); // Delay of 300ms for text
     }
 
-    return () => clearTimeout(timeout); // Cleanup timeout on component unmount or state change
+    return () => {
+      clearTimeout(iconTimeout);
+      clearTimeout(textTimeout);
+    }; // Cleanup timeouts on component unmount or state change
   }, [isHovered]);
 
   return (
@@ -79,16 +118,16 @@ const Text = ({ text, link, Icon }) => {
         onMouseLeave={() => setIsHovered(false)}
       >
         <Icon color={iconColor} />
-
         <h1
-          className={` ml-6 text-white text-[1.3rem] font-normal font-['Saira'] ${
+          className={`ml-6 text-[1.3rem] font-normal font-['Saira'] ${
             link ? "underline" : ""
-          } ${isHovered ? "text-[#8CEFBA]" : ""}`}
+          }`}
           style={{
+            color: textColor,
             transition:
               "color 0.3s ease-in-out, text-decoration 0.3s ease-in-out",
             lineHeight: "1.5", // Increase line spacing
-            letterSpacing: "0.1em",
+            letterSpacing: "0.1em", // Increase character spacing
           }}
         >
           {text}
