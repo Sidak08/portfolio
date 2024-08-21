@@ -1,0 +1,11 @@
+.hollowText {
+    color: #9ae797;
+    text-shadow: 15px 15px 20px #8cefba;
+    -webkit-text-stroke-width: 4;
+    -webkit-text-stroke-color: #8cefba;
+    font-family: SAIBA-45;
+    font-size: 120px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

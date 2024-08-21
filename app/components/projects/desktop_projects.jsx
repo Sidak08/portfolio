@@ -13,7 +13,7 @@ const filledText = localFont({
 
 const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
-export default function Projects({ active, setActive }) {
+export default function DesktopProjects({ active, setActive }) {
   const icons = {
     adobe: "/logos/adobe.png",
     amplify: "/logos/amplify.png",
@@ -26,6 +26,7 @@ export default function Projects({ active, setActive }) {
     insomnia: "/logos/insomnia.png",
     js: "/logos/js.png",
     materialUi: "/logos/materialUi.png",
+    mediaPipe: "/logos/mediaPipe.png",
     mongoDb: "/logos/mongoDb.png",
     mySql: "/logos/mySql.png",
     near: "/logos/near.png",
@@ -493,7 +494,7 @@ export default function Projects({ active, setActive }) {
             setActive((pre) => "projects");
           }
         }}
-        className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
+        className="absolute top-[10%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
       <div className="w-full min-h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
         <div className="w-full h-[50px] mb-20">
@@ -568,7 +569,10 @@ const Project = ({ info, key }) => {
             </h4>
           </div>
           <div className="flex items-center justify-between mx-8 w-full mt-8">
-            <div className="flex items-center justify-evenly w-[60%]">
+            <div
+              className={`flex items-center justify-evenly`}
+              style={{ minWidth: `${info.icons.length * 70}px` }}
+            >
               {info.icons.map((icon, index) => (
                 <img src={icon} className="h-[35px]" key={index} />
               ))}
