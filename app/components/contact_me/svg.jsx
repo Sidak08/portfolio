@@ -1,18 +1,27 @@
-function Email({ color = "ffffff", height = 22, width = 28 }) {
+import React from "react";
+
+function Email({ color = "#ffffff", height = 28, width = 34 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
       fill="none"
-      viewBox="0 0 28 22"
+      viewBox="0 0 30 30"
     >
       <path
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        d="M4 1h20c1.375 0 2.5 1.125 2.5 2.5v15c0 1.375-1.125 2.5-2.5 2.5H4a2.507 2.507 0 01-2.5-2.5v-15C1.5 2.125 2.625 1 4 1z"
+        d="M5 5h20c1.375 0 2.5 1.125 2.5 2.5v15c0 1.375-1.125 2.5-2.5 2.5H5a2.507 2.507 0 01-2.5-2.5v-15C2.5 6.125 3.625 5 5 5z"
+      ></path>
+      <path
+        stroke={color}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M27.5 7.5L15 16.25 2.5 7.5"
       ></path>
     </svg>
   );
