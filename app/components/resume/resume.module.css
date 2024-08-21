@@ -1,0 +1,11 @@
+.resume {
+    color: #a396f9;
+    text-shadow: 15px 15px 20px #a396f9;
+    -webkit-text-stroke-width: 4;
+    -webkit-text-stroke-color: #a396f9;
+    font-family: SAIBA-45;
+    font-size: 200px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

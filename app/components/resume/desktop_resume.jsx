@@ -18,12 +18,13 @@ export default function DesktopResume({ active, setActive }) {
         className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
 
-      <div className="w-full bg-[#0A0F13] flex items-center justify-evenly">
+      <div className="w-full bg-[#0A0F13] flex items-center justify-evenly pt-20 pb-20">
         <h1
-          className={`${styles.resume}text-[#a396f9] text-[200px] font-normal font-['SAIBA-45']`}
+          className={`${styles.resume} w-[127px] text-[#a396f9] text-[200px] font-normal font-['SAIBA-45']`}
         >
-          Resume
+          R e s u m e
         </h1>
+        <Image src="/resume.png" width={800} height={1200} />
       </div>
     </section>
   );
