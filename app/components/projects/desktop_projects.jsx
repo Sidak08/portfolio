@@ -104,7 +104,7 @@ export default function Projects({ active, setActive }) {
         className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
       <div className="w-full min-h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
-        <div className="w-full h-[50px]">
+        <div className="w-full h-[50px] mb-20">
           <h1 className={`${styles.hollowText} ml-20`}>Projects</h1>
         </div>
         <Project info={projects[0]} />
@@ -117,37 +117,39 @@ export default function Projects({ active, setActive }) {
 }
 
 const Project = ({ info }) => {
-  // const shadow = "shadow-[-10px_-10px_0_0_" + info.color + "]";
-
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["end end", "start start"],
   });
   const [scrollPos, setScrollPos] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
 
   useEffect(() => {
+    // Get the height of the container once the component mounts
+    if (ref.current) {
+      setContainerHeight(ref.current.offsetHeight);
+    }
+
     const intervalId = setInterval(() => {
       setScrollPos(scrollYProgress.get());
-      console.log(scrollYProgress.get());
-    }, 50);
+    }, 10);
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, [scrollYProgress]);
 
   return (
-    <div className="w-[90%] max-w-[1500px] flex items-center justify-around my-10">
+    <div className="w-[90%] max-w-[1500px] flex items-start justify-around my-10 min-h-[470px] h-auto">
       <div
-        className={`min-w-[10px] rounded-xl -mr-[2px]`}
+        className="min-w-[12px] rounded-xl -mr-[2px]"
         style={{
-          minHeight: "100%",
-          // height: `${Math.min(scrollPos * 130, 98)}%`,
+          height: `${Math.min(containerHeight * scrollPos * 1.3, containerHeight - containerHeight * 0.1)}px`, // Multiply the container height by 0.5 as an example
           backgroundColor: info.color,
         }}
       />
       <div className="w-full">
         <div
-          className={`h-[10px] rounded-xl -mb-[2px]`}
+          className="h-[12px] rounded-l-xl -ml-[4px] rounded-r-xl -mb-[2px]"
           style={{
             width: `${Math.min(scrollPos * 130, 98)}%`,
             backgroundColor: info.color,
@@ -155,10 +157,10 @@ const Project = ({ info }) => {
         />
         <div
           ref={ref}
-          className={` py-6 bg-[#0a1920] rounded-xl w-full min-h-[460px] flex flex-col items-center justify-evenly`}
+          className="py-6 bg-[#0a1920] rounded-xl w-full min-h-[470px] flex flex-col items-center justify-evenly"
         >
           <div
-            className={`w-full ml-16 color-[${info.color}] mb-6 text-[3.125rem] leading-[normal] ${filledText.className}`}
+            className={`w-full ml-16 mb-6 text-[3.125rem] leading-[normal] ${filledText.className}`}
             style={{ color: info.color }}
           >
             <h5>{info.title}</h5>

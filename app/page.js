@@ -5,6 +5,7 @@ import DesktopAboutMe from "./components/about_me/desktop_about_me";
 import Navbar from "./components/navbar/navbar";
 import SideScroll from "./components/test/sideScroll";
 import Projects from "./components/projects/desktop_projects";
+import DesktopResume from "./components/resume/desktop_resume";
 import { useState } from "react";
 import "./globals.css";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <DesktopHome active={active} setActive={setActive} />
       <DesktopAboutMe active={active} setActive={setActive} />
       <Projects active={active} setActive={setActive} />
+      <DesktopResume active={active} setActive={setActive} />
     </main>
   );
 }
