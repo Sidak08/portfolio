@@ -16,6 +16,11 @@ import {
 } from "./svg";
 import Link from "next/link";
 
+const outlineText = localFont({
+  src: "../.././fonts/saiba-45.woff2",
+  display: "swap",
+});
+
 export default function DesktopContact({ active, setActive }) {
   return (
     <section id="contact" className="relative">
@@ -29,7 +34,9 @@ export default function DesktopContact({ active, setActive }) {
       ></motion.div>
 
       <div className="w-full h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
-        <h1 className={styles.hollowText}>Contact Me</h1>
+        <h1 className={`${outlineText.className} ${styles.hollowText}`}>
+          Contact Me
+        </h1>
         <div className="max-w-[1200px] w-[80%] min-h-[500px] rounded-xl bg-[#0A1920] flex flex-col items-start justify-evenly relative">
           <Text
             text="SidakSingh318@gmail.com"

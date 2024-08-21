@@ -11,6 +11,11 @@ const filledText = localFont({
   display: "swap",
 });
 
+const outlineText = localFont({
+  src: "../.././fonts/saiba-45.woff2",
+  display: "swap",
+});
+
 const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
 export default function DesktopProjects({ active, setActive }) {
@@ -273,7 +278,7 @@ export default function DesktopProjects({ active, setActive }) {
     {
       title: "UNI-Sign",
       description:
-        "UniSign was inspired by a World War I documentary we watched in history class, where we saw how those deafened by explosions struggled to communicate. Moved by this, we sought to create a solution that could bridge this communication gap. Our research revealed a lack of tools that directly translate sign language into other languages, which motivated us to develop UniSign—a translator that converts sign language into multiple spoken languages. UniSign integrates machine learning, using a RandomForestClassifier, with frontend technologies like Next.js, React, and Tailwind. The process starts with the user capturing an image of a hand sign, which the backend processes to predict the corresponding letter in sign language. The prediction is then translated into a chosen language using the Google Translate API and displayed on the screen, making UniSign a powerful tool for accessible, real-time communication.",
+        "UniSign was inspired by a World War I documentary where we saw how those deafened by explosions struggled to communicate. This motivated us to create a solution to bridge that gap. Our research revealed a lack of tools translating sign language into other languages, leading us to develop UniSign. It uses a RandomForestClassifier with frontend technologies like Next.js, React, and Tailwind. Users capture an image of a hand sign, which the backend processes to predict the corresponding letter. The prediction is then translated into a chosen language using the Google Translate API and displayed, enabling accessible, real-time communication.",
       image: "/project_images/uni-sign.png",
       icons: [
         icons.js,
@@ -487,7 +492,7 @@ export default function DesktopProjects({ active, setActive }) {
     },
   ];
   return (
-    <section id="projects" className={`relative ${sarpanch.className}`}>
+    <section id="projects" className={`relative ${sarpanch.className} `}>
       <motion.div
         whileInView={() => {
           if (active !== "projects") {
@@ -497,8 +502,10 @@ export default function DesktopProjects({ active, setActive }) {
         className="absolute top-[10%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
       <div className="w-full min-h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
-        <div className="w-full h-[50px] mb-20">
-          <h1 className={`${styles.hollowText} ml-20`}>Projects</h1>
+        <div className="w-full h-[50px] mb-20 pt-24">
+          <h1 className={`${outlineText.className} ${styles.hollowText} ml-20`}>
+            Projects
+          </h1>
         </div>
         {projects.map((project, index) =>
           Project({ info: project, key: index }),

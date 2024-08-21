@@ -43,10 +43,7 @@ export default function App() {
 
   return (
     <>
-      <Spline
-        scene="https://prod.spline.design/Iqam3spY2vG9EPfB/scene.splinecode"
-        className="w-full"
-      />
+      <Spline scene="https://prod.spline.design/lFYYbKxMsEi48ZNo/scene.splinecode" />
     </>
   );
 }

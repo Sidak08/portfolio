@@ -6,6 +6,11 @@ import styles from "./resume.module.css";
 import localFont from "next/font/local";
 import Image from "next/image";
 
+const outlineText = localFont({
+  src: "../.././fonts/saiba-45.woff2",
+  display: "swap",
+});
+
 export default function DesktopResume({ active, setActive }) {
   return (
     <section id="resume" className="relative">
@@ -20,7 +25,7 @@ export default function DesktopResume({ active, setActive }) {
 
       <div className="w-full bg-[#0A0F13] flex items-center justify-evenly pt-20 pb-20">
         <h1
-          className={`${styles.resume} w-[127px] text-[#a396f9] text-[200px] font-normal font-['SAIBA-45']`}
+          className={`${outlineText.className} ${styles.resume} w-[127px] text-[#a396f9] text-[200px] font-normal`}
         >
           R e s u m e
         </h1>

@@ -6,8 +6,13 @@ import { useGlitch } from "react-powerglitch";
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const myFont = localFont({
+const filledText = localFont({
   src: "../.././fonts/cyber-reg-font.woff2",
+  display: "swap",
+});
+
+const outlineText = localFont({
+  src: "../.././fonts/saiba-45.woff2",
   display: "swap",
 });
 
@@ -32,9 +37,11 @@ export default function DesktopHome({ active, setActive }) {
               <Image src="/home-profile.png" height={412} width={413} />
             </div>
             <div className="">
-              <div className={`${styles.myName}`}>My Name </div>
+              <div className={`${styles.myName} ${outlineText.className}`}>
+                My Name{" "}
+              </div>
               <div
-                className={`${myFont.className} ${styles.isSidak} mt-9 ml-32`}
+                className={`${filledText.className} ${styles.isSidak} mt-9 ml-32`}
               >
                 Is SidaK
               </div>
