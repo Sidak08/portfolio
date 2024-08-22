@@ -11,6 +11,9 @@ import DesktopResume from "./components/resume/desktop_resume";
 import DesktopContact from "./components/contact_me/desktop_contact";
 import MobileHome from "./components/home/mobile_home";
 import MobileAboutMe from "./components/about_me/mobile_about_me";
+import MobileResume from "./components/resume/mobile_resume";
+import MobileContact from "./components/contact_me/mobile_contact";
+
 import "./globals.css";
 
 export default function Home() {
@@ -64,7 +67,16 @@ export default function Home() {
       ) : (
         <></>
       )}
-      <div className="h-screen w-full"></div>
+      {isMounted && isMobile ? (
+        <MobileResume active={active} setActive={setActive} />
+      ) : (
+        <></>
+      )}
+      {isMounted && isMobile ? (
+        <MobileContact active={active} setActive={setActive} />
+      ) : (
+        <></>
+      )}
     </main>
   );
 }
