@@ -10,6 +10,7 @@ import DesktopProjects from "./components/projects/desktop_projects";
 import DesktopResume from "./components/resume/desktop_resume";
 import DesktopContact from "./components/contact_me/desktop_contact";
 import MobileHome from "./components/home/mobile_home";
+import MobileAboutMe from "./components/about_me/mobile_about_me";
 import "./globals.css";
 
 export default function Home() {
@@ -58,6 +59,12 @@ export default function Home() {
       ) : (
         <></>
       )}
+      {isMounted && isMobile ? (
+        <MobileAboutMe active={active} setActive={setActive} />
+      ) : (
+        <></>
+      )}
+      <div className="h-screen w-full"></div>
     </main>
   );
 }
