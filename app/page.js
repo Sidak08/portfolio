@@ -25,10 +25,6 @@ export default function Home() {
   }, []);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  {
-    isMounted && !isMobile ? <CharityBanner /> : <></>;
-  }
-
   return (
     <main className="w-full noScroll relative">
       <Navbar active={active} setActive={setActive} />
