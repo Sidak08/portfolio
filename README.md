@@ -1,7 +1,3 @@
-Here's a README for your portfolio site:
-
----
-
 # Portfolio Website
 
 Welcome to my personal portfolio site! This website showcases various projects I've worked on, highlighting my skills and experience in web development, programming, and hackathons.
@@ -119,6 +115,9 @@ If you'd like to contribute to this project, feel free to fork the repository an
 
 This project is licensed under the [MIT License](LICENSE).
 
----
-
-Feel free to adjust the content and links as needed!
+## Screenshots
+![screenshot](https://github.com/Sidak08/portfolio/blob/main/screenshots/Screen%20Shot%202024-08-28%20at%209.25.29%20PM.png)
+![screenshot](https://github.com/Sidak08/portfolio/blob/main/screenshots/Screen%20Shot%202024-08-28%20at%209.25.56%20PM.png)
+![screenshot](https://github.com/Sidak08/portfolio/blob/main/screenshots/Screen%20Shot%202024-08-28%20at%209.26.03%20PM.png)
+![screenshot](https://github.com/Sidak08/portfolio/blob/main/screenshots/Screen%20Shot%202024-08-28%20at%209.26.14%20PM.png)
+![screenshot](https://github.com/Sidak08/portfolio/blob/main/screenshots/Screen%20Shot%202024-08-28%20at%209.26.18%20PM.png)
