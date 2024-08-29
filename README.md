@@ -73,6 +73,9 @@ Welcome to my personal portfolio site! This website showcases various projects I
 
 ## Getting Started
 
+### Try It Out
+- [Link](https://sidak.works/)
+
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/)
@@ -84,7 +87,7 @@ Welcome to my personal portfolio site! This website showcases various projects I
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/portfolio.git
+   git clone https://github.com/Sidak08/portfolio.git
    ```
 
 2. Navigate into the project directory:
