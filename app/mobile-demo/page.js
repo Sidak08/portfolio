@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import MobileProjectsSimple from "../components/projects/mobile_projects_simple";
+import MobileProjectsImproved from "../components/projects/mobile_projects_improved";
 
 export default function MobileDemoPage() {
   const [active, setActive] = useState("projects");
@@ -11,10 +11,10 @@ export default function MobileDemoPage() {
       <div className="sticky top-0 z-50 bg-[#0f1419]/80 backdrop-blur-md border-b border-gray-800">
         <div className="max-w-md mx-auto px-4 py-4">
           <h1 className="text-white text-xl font-bold text-center">
-            Mobile Projects Demo
+            Mobile Projects Portfolio
           </h1>
           <p className="text-gray-400 text-sm text-center mt-1">
-            Scroll to see cards auto-expand when centered
+            All 10 projects • Auto-expand on center • Smooth animations
           </p>
         </div>
       </div>
@@ -40,12 +40,16 @@ export default function MobileDemoPage() {
             </li>
             <li className="flex items-start space-x-2">
               <span className="text-purple-400 mt-1">•</span>
+              <span>Click on any card to manually toggle open/close</span>
+            </li>
+            <li className="flex items-start space-x-2">
+              <span className="text-orange-400 mt-1">•</span>
               <span>
                 Expanded view shows description, technologies, and visit links
               </span>
             </li>
             <li className="flex items-start space-x-2">
-              <span className="text-orange-400 mt-1">•</span>
+              <span className="text-pink-400 mt-1">•</span>
               <span>Smooth animations and scroll-based interactions</span>
             </li>
           </ul>
@@ -53,12 +57,15 @@ export default function MobileDemoPage() {
       </div>
 
       {/* Mobile Projects Component */}
-      <MobileProjectsSimple active={active} setActive={setActive} />
+      <MobileProjectsImproved active={active} setActive={setActive} />
 
       {/* Footer */}
       <div className="max-w-md mx-auto px-4 py-8">
         <div className="bg-[#0a1920] rounded-xl p-4 border border-gray-800 text-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-sm mb-2">
+            Complete portfolio with improved center detection
+          </p>
+          <p className="text-gray-500 text-xs">
             Built with Next.js, Framer Motion & Tailwind CSS
           </p>
           <div className="flex justify-center items-center space-x-4 mt-3">
