@@ -1,49 +1,64 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Spline from "@splinetool/react-spline";
 
 export default function App() {
-  // const splineRef = useRef(null);
-  // const textObjects = useRef([]);
+  const splineRef = useRef();
+  const rotationRef = useRef(null);
 
-  // function onLoad(spline) {
-  //   splineRef.current = spline;
+  function onLoad(splineApp) {
+    splineRef.current = splineApp;
 
-  //   // Find all text objects by name
-  //   textObjects.current = [
-  //     spline.findObjectByName("Text"),
-  //     spline.findObjectByName("Text 2"),
-  //     spline.findObjectByName("Text 3"),
-  //     spline.findObjectByName("Text 4"),
-  //     // Add more text objects as needed
-  //   ];
+    // Try to find an object to rotate
+    try {
+      // Store a reference to the main scene
+      const scene = splineApp.scene;
+      if (scene) {
+        rotationRef.current = scene;
+        console.log("Scene loaded successfully");
+      }
+    } catch (err) {
+      console.log("Error accessing scene:", err);
+    }
+  }
 
-  //   // Listen to cursor movement
-  //   document.addEventListener("mousemove", onMouseMove);
-  // }
+  useEffect(() => {
+    let frameId;
+    let angle = 0;
 
-  // function onMouseMove(event) {
-  //   const { clientX, clientY } = event;
+    const animate = () => {
+      if (rotationRef.current) {
+        try {
+          // Apply a simple rotation to the entire scene
+          angle += 0.01; // Adjust speed as needed
 
-  //   console.log(clientX, clientY);
+          // Apply a gentle rotation
+          rotationRef.current.rotation.y = angle;
 
-  //   // Update the lookAt for each text object
-  //   textObjects.current.forEach((textObj) => {
-  //     if (textObj) {
-  //       textObj.lookAt(clientX, clientY, 0);
-  //     }
-  //   });
-  // }
+          // Add a subtle bobbing effect
+          rotationRef.current.rotation.x = Math.sin(angle * 0.5) * 0.1;
+        } catch (err) {
+          console.log("Animation error:", err);
+        }
+      }
 
-  // // Cleanup event listener when component unmounts
-  // useEffect(() => {
-  //   return () => {
-  //     document.removeEventListener("mousemove", onMouseMove);
-  //   };
-  // }, []);
+      frameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+      }
+    };
+  }, []);
 
   return (
-    <>
-      <Spline scene="https://prod.spline.design/lFYYbKxMsEi48ZNo/scene.splinecode" />
-    </>
+    <div style={{ width: "100%", height: "100%" }}>
+      <Spline
+        onLoad={onLoad}
+        scene="https://prod.spline.design/lFYYbKxMsEi48ZNo/scene.splinecode"
+      />
+    </div>
   );
 }

@@ -44,10 +44,13 @@ export default function MobileAboutMe({ active, setActive }) {
       ></motion.div>
       <div className="w-full min-h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly pb-[30px]">
         <SkillScroll />
-        <div className="flex items-center justify-evenly w-full mt-14">
+        <div className="w-[280px] h-[280px] mx-auto mt-6">
+          <SplineView />
+        </div>
+        <div className="flex items-center justify-evenly w-full mt-6">
           <div
             ref={ref}
-            className={`min-h-[400px] max-w-[80%] px-8 py-2 leading-[1.7] text-xl flex items-center justify-center rounded-[12px] bg-[#0A1920] transition-shadow duration-500 ease-in-out ${
+            className={`min-h-[400px] min-w-[300px] max-w-[80%] px-8 py-2 leading-[1.7] text-xl flex items-center justify-center rounded-[12px] bg-[#0A1920] transition-shadow duration-500 ease-in-out ${
               scrollPos > 0.1
                 ? "shadow-[25px_25px_0_0_#7DCDFD] hover:shadow-[25px_25px_0_0_#7DFDF4] -mt-[28px] -ml-[28px]"
                 : "-mt-3 -mr-3"
