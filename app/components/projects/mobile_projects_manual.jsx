@@ -745,34 +745,40 @@ const ProjectCard = React.forwardRef(
           COLLAPSED STATE CONTENT
           Always visible - shows basic project info in compact form
       ======================================================================== */}
-        <div className="p-4 flex items-center space-x-4 h-[120px]">
-          {/* Project thumbnail image */}
-          <div className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
-            />
-          </div>
+        <div
+          className={`p-6 h-[120px] ${isExpanded ? "h-[90px] p-3 mb-2 -mt-1  flex flex-col justify-center" : "flex items-center space-x-4"}`}
+        >
+          {/* Project thumbnail image - hidden when expanded */}
+          {!isExpanded && (
+            <div className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
 
           {/* Basic project information */}
-          <div className="flex-1 min-w-0">
+          <div className={`${isExpanded ? "w-full" : "flex-1 min-w-0"}`}>
             <h3
-              className="text-lg font-bold truncate mb-1"
+              className={`text-2xl font-bold mb-2 ${isExpanded ? "" : "truncate"}`}
               style={{ color: project.color }}
             >
               {project.title}
             </h3>
-            <p className="text-gray-400 text-sm leading-tight">
-              <span className="line-clamp-2">
-                {project.description.substring(0, 80)}...
-              </span>
-            </p>
+            {!isExpanded && (
+              <p className="text-gray-400 text-sm leading-relaxed">
+                <span className="line-clamp-2">
+                  {project.description.substring(0, 80)}...
+                </span>
+              </p>
+            )}
             {/* Active indicator */}
             {activeIndex === index && !isExpanded && (
               <div
-                className="mt-1 w-2 h-2 rounded-full animate-pulse"
+                className="mt-2 w-2 h-2 rounded-full animate-pulse"
                 style={{ backgroundColor: project.color }}
               ></div>
             )}
@@ -784,14 +790,14 @@ const ProjectCard = React.forwardRef(
           Only visible when card is expanded - shows detailed information
       ======================================================================== */}
         <motion.div
-          className="px-4 pb-6"
+          className="px-6 pb-6"
           variants={contentVariants}
           animate={isExpanded && !isClosing ? "expanded" : "collapsed"}
         >
           {(isExpanded || isClosing) && (
             <>
               {/* Full-size project image */}
-              <div className="relative w-full h-48 rounded-xl overflow-hidden mb-4 -mt-2">
+              <div className="relative w-full h-48 rounded-xl overflow-hidden mb-4 -mt-8">
                 <Image
                   src={project.image}
                   alt={project.title}
