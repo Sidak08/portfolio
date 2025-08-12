@@ -530,12 +530,12 @@ const MobileProjectsManual = ({ active, setActive }) => {
 
     console.log("📐 Scrolling measurements:", {
       cardTop: cardTop,
-      targetScrollTop: cardTop - 50,
+      targetScrollTop: cardTop + 40,
       currentScrollY: window.scrollY,
     });
 
-    // Calculate scroll position to position card at top of viewport with 50px padding
-    let targetScrollTop = cardTop - 50;
+    // Calculate scroll position to position card at top of viewport with 40px padding
+    let targetScrollTop = cardTop;
 
     console.log("🎯 Initial target scroll position:", targetScrollTop);
 
@@ -551,7 +551,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
 
     console.log("⚖️ Final scroll target:", targetScrollTop);
 
-    // Additional check: if the card would be cut off at the bottom with 50px padding,
+    // Additional check: if the card would be cut off at the bottom with 40px padding,
     // adjust to show as much of the card as possible
     const cardBottomAfterScroll = cardTop + cardHeight - targetScrollTop;
     if (cardBottomAfterScroll > viewportHeight - 20) {
@@ -573,7 +573,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
 
     // Smooth scroll to the calculated position
     window.scrollTo({
-      top: targetScrollTop,
+      top: targetScrollTop - 20,
       behavior: "smooth",
     });
 
@@ -854,51 +854,6 @@ const MobileProjectsManual = ({ active, setActive }) => {
       ref={containerRef}
       className="w-full min-h-screen bg-[#0f1419] py-8 px-4"
     >
-      {/* Debug buttons */}
-      <div className="fixed top-4 right-4 z-50 space-y-2">
-        <button
-          onClick={() => {
-            console.log("🧪 MANUAL TEST - expanding card 1 with scroll after");
-            handleCardExpansion(1, true, 0);
-          }}
-          className="bg-red-500 text-white px-4 py-2 rounded text-sm"
-        >
-          Test Card 1 Expand+Scroll
-        </button>
-        <button
-          onClick={() => {
-            console.log("🧪 MANUAL TEST - expanding card 3 with scroll after");
-            handleCardExpansion(3, true, 2);
-          }}
-          className="bg-blue-500 text-white px-4 py-2 rounded text-sm"
-        >
-          Test Card 3 Expand+Scroll
-        </button>
-        <button
-          onClick={() => {
-            console.log("🧪 DIRECT SCROLL TEST - scrolling to card 1");
-            scrollToCard(1);
-          }}
-          className="bg-purple-500 text-white px-4 py-2 rounded text-sm"
-        >
-          Direct Scroll Test
-        </button>
-        <button
-          onClick={() => {
-            console.log("🧪 Current scroll position:", window.scrollY);
-            console.log(
-              "🧪 Card refs:",
-              cardRefs.current.map((ref, i) =>
-                ref ? `Card ${i}: exists` : `Card ${i}: null`,
-              ),
-            );
-          }}
-          className="bg-green-500 text-white px-4 py-2 rounded text-sm"
-        >
-          Debug Info
-        </button>
-      </div>
-
       <div className="max-w-md mx-auto space-y-6">
         {projects.map((project, index) => (
           <ProjectCard
