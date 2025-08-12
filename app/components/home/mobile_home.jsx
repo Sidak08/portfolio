@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { useGlitch } from "react-powerglitch";
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import ProfileCard from ".././reactBits/profile-card";
 
 const filledText = localFont({
   src: "../.././fonts/cyber-reg-font.woff2",
@@ -31,12 +32,24 @@ export default function MobileHome({ active, setActive }) {
       ></motion.div>
 
       <div className="w-full h-screen bg-[#0A0F13] flex flex-col items-center justify-center">
-        <div
+        {/* <div
           ref={glitch.ref}
           className="w-[80%] flex items-center justify-center ml-[10%]"
         >
           <img src="/home-profile.png" className="w-full" />
-        </div>
+        </div>*/}
+        <ProfileCard
+          name="Javi A. Torres"
+          title="Software Engineer"
+          handle="javicodes"
+          status="Online"
+          contactText="Contact Me"
+          avatarUrl="/path/to/avatar.jpg"
+          showUserInfo={true}
+          enableTilt={true}
+          enableMobileTilt={true}
+          onContactClick={() => console.log("Contact clicked")}
+        />
         <div className="w-full flex flex-col items-center justify-evenly">
           <div className="mt-14 flex flex-col items-center justify-evenly">
             <div className={`${styles.myNameMobile} ${outlineText.className}`}>
