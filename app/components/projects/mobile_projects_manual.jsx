@@ -500,13 +500,20 @@ const MobileProjectsManual = ({ active, setActive }) => {
   // ============================================================================
 
   /**
-   * Scrolls to position a specific card at the center of the viewport
+   * Scrolls to position a specific card at the top of the viewport
    * Uses smooth scrolling with proper offset calculations
    *
-   * @param {number} index - Index of the card to center
+   * @param {number} index - Index of the card to position at top
    */
   const scrollToCard = (index) => {
-    if (!cardRefs.current[index]) return;
+    console.log("🔥 scrollToCard called with index:", index);
+
+    if (!cardRefs.current[index]) {
+      console.log("❌ No card ref found for index:", index);
+      return;
+    }
+
+    console.log("✅ Card ref found, proceeding with scroll");
 
     // Set scrolling flag to prevent activeIndex changes
     setIsScrollingOrAnimating(true);
@@ -521,8 +528,16 @@ const MobileProjectsManual = ({ active, setActive }) => {
     const cardTop = cardRect.top + window.scrollY;
     const cardHeight = cardRect.height;
 
-    // Calculate scroll position to center the card in the viewport
-    let targetScrollTop = cardTop + 500;
+    console.log("📐 Scrolling measurements:", {
+      cardTop: cardTop,
+      targetScrollTop: cardTop - 50,
+      currentScrollY: window.scrollY,
+    });
+
+    // Calculate scroll position to position card at top of viewport with 50px padding
+    let targetScrollTop = cardTop - 50;
+
+    console.log("🎯 Initial target scroll position:", targetScrollTop);
 
     // Safety checks for page boundaries
     const documentHeight = document.documentElement.scrollHeight;
@@ -534,22 +549,41 @@ const MobileProjectsManual = ({ active, setActive }) => {
     // Ensure we don't scroll past the bottom of the page
     targetScrollTop = Math.min(maxScrollTop, targetScrollTop);
 
-    // Additional check: if the card would be cut off at the bottom when centered,
+    console.log("⚖️ Final scroll target:", targetScrollTop);
+
+    // Additional check: if the card would be cut off at the bottom with 50px padding,
     // adjust to show as much of the card as possible
     const cardBottomAfterScroll = cardTop + cardHeight - targetScrollTop;
     if (cardBottomAfterScroll > viewportHeight - 20) {
+      console.log("🔧 Card would be cut off, adjusting position");
       // If card would be cut off, position it so bottom has at least 20px padding
       const adjustedScrollTop = cardTop + cardHeight - viewportHeight + 20;
       if (adjustedScrollTop >= 0 && adjustedScrollTop <= maxScrollTop) {
         targetScrollTop = adjustedScrollTop;
+        console.log("✅ Position adjusted to:", targetScrollTop);
       }
     }
+
+    console.log("🚀 EXECUTING SCROLL - window.scrollTo called with:", {
+      top: targetScrollTop,
+      behavior: "smooth",
+      currentPosition: window.scrollY,
+      willScrollBy: targetScrollTop - window.scrollY,
+    });
 
     // Smooth scroll to the calculated position
     window.scrollTo({
       top: targetScrollTop,
       behavior: "smooth",
     });
+
+    // Verify scroll was initiated
+    setTimeout(() => {
+      const scrollDiff = Math.abs(window.scrollY - targetScrollTop);
+      console.log(
+        `📊 Scroll ${scrollDiff < 50 ? "SUCCESS" : "FAILED"} - requested: ${targetScrollTop}, actual: ${window.scrollY}`,
+      );
+    }, 100);
 
     // Clear any existing debounce timer
     if (scrollDebounceTimer.current) {
@@ -559,18 +593,12 @@ const MobileProjectsManual = ({ active, setActive }) => {
     // Set a debounced timer to clear the scrolling flag
     scrollDebounceTimer.current = setTimeout(() => {
       setIsScrollingOrAnimating(false);
+      console.log("🏁 Scroll animation completed, flags cleared");
     }, 1200);
 
-    console.log(`Scrolling to center card ${index} with boundary checks:`, {
-      cardTop: cardRect.top,
-      cardHeight,
-      viewportHeight,
-      documentHeight,
-      maxScrollTop,
-      currentScrollY: window.scrollY,
-      requestedScrollTop: cardTop - viewportHeight / 2 + cardHeight / 2,
-      finalScrollTop: targetScrollTop,
-    });
+    console.log(
+      `📋 Scroll summary: Card ${index} → position ${targetScrollTop} (${targetScrollTop - window.scrollY > 0 ? "down" : "up"} ${Math.abs(targetScrollTop - window.scrollY)}px)`,
+    );
   };
 
   // ============================================================================
@@ -590,14 +618,14 @@ const MobileProjectsManual = ({ active, setActive }) => {
    * @param {boolean} isManual - Whether this is a manual user interaction (default: false)
    *
    * Animation Flow:
-   * - Opening: Sets animation state → centers card → expands card → completes after 600ms
+   * - Opening: Sets animation state → positions card at top → expands card → completes after 600ms
    * - Closing: Sets animation state → triggers exit animations → closes after 900ms
    *
    * Usage Examples:
    *
    * 1. Open a specific card:
-   *    handleCardExpansion(1); // Centers and opens RSVP System project
-   *    handleCardExpansion(3, true); // Centers and opens Ios-status-bar project manually
+   *    handleCardExpansion(1); // Positions at top and opens RSVP System project
+   *    handleCardExpansion(3, true); // Positions at top and opens Ios-status-bar project manually
    *
    * 2. Close all cards:
    *    handleCardExpansion(null);
@@ -608,7 +636,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
    * 4. Integration with scroll events:
    *    const scrollY = window.scrollY;
    *    const cardIndex = Math.floor(scrollY / 200);
-   *    handleCardExpansion(cardIndex + 1); // Centers card in viewport
+   *    handleCardExpansion(cardIndex + 1); // Positions card at top of viewport
    *
    * 5. Intersection Observer integration:
    *    useEffect(() => {
@@ -616,18 +644,33 @@ const MobileProjectsManual = ({ active, setActive }) => {
    *        entries.forEach((entry) => {
    *          if (entry.isIntersecting) {
    *            const cardId = parseInt(entry.target.dataset.cardId);
-   *            handleCardExpansion(cardId); // Centers and expands card
+   *            handleCardExpansion(cardId); // Positions at top and expands card
    *          }
    *        });
    *      });
    *      // Observe card elements...
    *    }, []);
    */
-  const handleCardExpansion = (cardId, isManual = false) => {
+  const handleCardExpansion = (
+    cardId,
+    isManual = false,
+    scrollToIndex = null,
+  ) => {
+    console.log("🎭 handleCardExpansion called:", {
+      cardId: cardId,
+      isManual: isManual,
+      currentExpandedCard: expandedCard,
+      isAnimating: isAnimating,
+    });
+
     // Prevent rapid clicking during animations to avoid state conflicts
-    if (isAnimating && !isManual) return;
+    if (isAnimating && !isManual) {
+      console.log("⏸️ Blocking expansion - animation in progress");
+      return;
+    }
 
     if (cardId === null) {
+      console.log("🔽 Starting CLOSE sequence for card:", expandedCard);
       // Closing sequence: Start exit animations for all elements
       console.log(
         "Starting close animation for card:",
@@ -655,7 +698,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
         if (expandedCard) {
           scrolledToCards.current.delete(expandedCard);
           console.log(
-            `Card ${expandedCard} removed from scrolled cards. Can be centered again.`,
+            `Card ${expandedCard} removed from scrolled cards. Can be positioned at top again.`,
           );
         }
       }, 900);
@@ -674,10 +717,25 @@ const MobileProjectsManual = ({ active, setActive }) => {
       setTimeout(() => {
         console.log("Completing open animation for card:", cardId);
         setIsAnimating(false);
+
+        // If this was an auto-expansion with scroll request, trigger scroll now
+        if (scrollToIndex !== null && !isManual) {
+          console.log(
+            "🚀 TRIGGERING POST-EXPANSION SCROLL to index:",
+            scrollToIndex,
+          );
+          setTimeout(() => {
+            scrollToCard(scrollToIndex);
+          }, 100); // Small delay to ensure expansion is visually complete
+        }
+
         // Keep scrolling flag active longer to prevent interference during settling
-        setTimeout(() => {
-          setIsScrollingOrAnimating(false);
-        }, 400);
+        setTimeout(
+          () => {
+            setIsScrollingOrAnimating(false);
+          },
+          scrollToIndex !== null ? 1600 : 400,
+        ); // Longer delay if we're scrolling
       }, 600);
     }
 
@@ -693,9 +751,9 @@ const MobileProjectsManual = ({ active, setActive }) => {
   // ============================================================================
 
   /**
-   * Effect to handle activeIndex changes and trigger card expansion with auto-centering
+   * Effect to handle activeIndex changes and trigger card expansion with auto-positioning
    * This creates a connection between scroll-based detection and card expansion
-   * Auto-centers cards in viewport only on initial detection, then allows free scrolling
+   * Auto-positions cards at top of viewport only on initial detection, then allows free scrolling
    * Includes debouncing to prevent rapid changes
    */
   useEffect(() => {
@@ -707,12 +765,24 @@ const MobileProjectsManual = ({ active, setActive }) => {
 
       // Add a small delay to ensure stable selection
       activeIndexStabilityTimer.current = setTimeout(() => {
-        console.log("Active index changed to:", activeIndex);
+        console.log("🎯 Active index changed to:", activeIndex);
 
         const cardId = projects[activeIndex]?.id;
+        console.log("📋 Card ID for active index:", cardId);
 
         // Only auto-scroll and expand if this card hasn't been scrolled to before
         // OR if it was previously expanded but is now collapsed (allowing reopening)
+        const hasBeenScrolledTo = scrolledToCards.current.has(cardId);
+        const isCurrentlyExpanded = expandedCard === cardId;
+
+        console.log("🔍 Scroll decision factors:", {
+          cardId: cardId,
+          hasBeenScrolledTo: hasBeenScrolledTo,
+          isCurrentlyExpanded: isCurrentlyExpanded,
+          expandedCard: expandedCard,
+          scrolledCardsSet: Array.from(scrolledToCards.current),
+        });
+
         if (
           cardId &&
           (!scrolledToCards.current.has(cardId) || expandedCard !== cardId)
@@ -720,18 +790,16 @@ const MobileProjectsManual = ({ active, setActive }) => {
           // Mark this card as having been scrolled to
           scrolledToCards.current.add(cardId);
           console.log(
-            `Centering card ${cardId}. Scrolled cards:`,
+            `🚀 TRIGGERING EXPANSION for card ${cardId}. Scroll will happen after expansion. Scrolled cards:`,
             Array.from(scrolledToCards.current),
           );
 
-          // Center the active card in viewport
-          scrollToCard(activeIndex);
-
-          // Expand the card
-          handleCardExpansion(cardId, false); // Auto expansion
+          // Expand the card first, scroll will be triggered after expansion completes
+          console.log("📞 Calling handleCardExpansion with cardId:", cardId);
+          handleCardExpansion(cardId, false, activeIndex); // Auto expansion with scroll index
         } else {
           console.log(
-            `Skipping center scroll to card ${cardId} - already scrolled to. Current expanded: ${expandedCard}`,
+            `⏭️ Skipping top scroll to card ${cardId} - already scrolled to. Current expanded: ${expandedCard}`,
           );
         }
       }, 300); // Small delay for stability
@@ -786,6 +854,51 @@ const MobileProjectsManual = ({ active, setActive }) => {
       ref={containerRef}
       className="w-full min-h-screen bg-[#0f1419] py-8 px-4"
     >
+      {/* Debug buttons */}
+      <div className="fixed top-4 right-4 z-50 space-y-2">
+        <button
+          onClick={() => {
+            console.log("🧪 MANUAL TEST - expanding card 1 with scroll after");
+            handleCardExpansion(1, true, 0);
+          }}
+          className="bg-red-500 text-white px-4 py-2 rounded text-sm"
+        >
+          Test Card 1 Expand+Scroll
+        </button>
+        <button
+          onClick={() => {
+            console.log("🧪 MANUAL TEST - expanding card 3 with scroll after");
+            handleCardExpansion(3, true, 2);
+          }}
+          className="bg-blue-500 text-white px-4 py-2 rounded text-sm"
+        >
+          Test Card 3 Expand+Scroll
+        </button>
+        <button
+          onClick={() => {
+            console.log("🧪 DIRECT SCROLL TEST - scrolling to card 1");
+            scrollToCard(1);
+          }}
+          className="bg-purple-500 text-white px-4 py-2 rounded text-sm"
+        >
+          Direct Scroll Test
+        </button>
+        <button
+          onClick={() => {
+            console.log("🧪 Current scroll position:", window.scrollY);
+            console.log(
+              "🧪 Card refs:",
+              cardRefs.current.map((ref, i) =>
+                ref ? `Card ${i}: exists` : `Card ${i}: null`,
+              ),
+            );
+          }}
+          className="bg-green-500 text-white px-4 py-2 rounded text-sm"
+        >
+          Debug Info
+        </button>
+      </div>
+
       <div className="max-w-md mx-auto space-y-6">
         {projects.map((project, index) => (
           <ProjectCard
@@ -984,16 +1097,24 @@ const ProjectCard = React.forwardRef(
           const cardTop = rect.top;
           const cardBottom = rect.bottom;
 
-          // Check if card is positioned at the center of the viewport (our target position)
+          // Check if card is positioned at the center of the viewport (detection happens from center)
+          // Note: Detection is from center, but when activated, card will scroll to top position
           const viewportHeight = window.innerHeight;
           const cardCenter = cardTop + (cardBottom - cardTop) / 2;
           const viewportCenter = viewportHeight / 2;
           const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
 
+          // Reduced debug logging for position checks
+          if (distanceFromCenter < 80) {
+            console.log(
+              `🔍 Card ${index} near center - distance: ${distanceFromCenter.toFixed(1)}px`,
+            );
+          }
+
           // Threshold for detecting if card is at target center position
           const threshold = 50; // 50px tolerance around the center
 
-          // Check if card is at center position and stable
+          // Check if card is at center position and stable (triggers scroll to top + expansion)
           const isAtTargetPosition =
             distanceFromCenter < threshold && // Card center is within 50px of viewport center
             cardTop >= -20 && // Card is not completely above viewport
@@ -1001,15 +1122,35 @@ const ProjectCard = React.forwardRef(
             cardBottom - cardTop > 60 && // Card has substantial content visible
             activeIndex !== index; // Not already active
 
+          if (isAtTargetPosition) {
+            console.log(`✅ Card ${index} IS AT TARGET POSITION!`, {
+              distanceFromCenter: distanceFromCenter,
+              threshold: threshold,
+              cardTop: cardTop,
+              cardBottom: cardBottom,
+              viewportHeight: viewportHeight,
+              activeIndex: activeIndex,
+            });
+          }
+
           if (isAtTargetPosition && lastCenteredIndex === index) {
             stableCount++;
+            console.log(
+              `🎯 Card ${index} stable count: ${stableCount}/${stabilityThreshold}`,
+            );
             // Only update after multiple stable checks of the same card
             if (stableCount >= stabilityThreshold) {
+              console.log(
+                `🔥 SETTING ACTIVE INDEX to ${index} after ${stableCount} stable checks`,
+              );
               setActiveIndex(index);
               stableCount = 0;
               lastCenteredIndex = null;
             }
           } else if (isAtTargetPosition) {
+            console.log(
+              `📍 Card ${index} detected at target position, starting stability count`,
+            );
             lastCenteredIndex = index;
             stableCount = 1; // Start counting for this card
           } else {
