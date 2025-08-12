@@ -1,17 +1,17 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import MobileProjectsManual from '../components/projects/mobile_projects_manual';
+"use client";
+import React, { useState, useEffect } from "react";
+import MobileProjectsManual from "../components/projects/mobile_projects_manual";
 
 export default function ManualDemoPage() {
-  const [active, setActive] = useState('projects');
-  const [currentExample, setCurrentExample] = useState('click');
+  const [active, setActive] = useState("projects");
+  const [currentExample, setCurrentExample] = useState("click");
 
   // Example implementations you can use
   const examples = {
-    click: 'Click to Toggle',
-    scroll: 'Scroll Based',
-    timed: 'Timed Sequence',
-    keyboard: 'Keyboard Control'
+    click: "Click to Toggle",
+    scroll: "Scroll Based",
+    timed: "Timed Sequence",
+    keyboard: "Keyboard Control",
   };
 
   return (
@@ -37,7 +37,9 @@ export default function ManualDemoPage() {
 
           {/* Example 1: Basic Click */}
           <div className="mb-4 p-3 bg-[#1a2634] rounded-lg">
-            <h3 className="text-blue-400 font-medium text-xs mb-2">1. Basic Click Toggle (Default)</h3>
+            <h3 className="text-blue-400 font-medium text-xs mb-2">
+              1. Basic Click Toggle (Default)
+            </h3>
             <code className="text-gray-300 text-xs block">
               {`// In handleCardExpansion function:
 setExpandedCard(cardId);`}
@@ -46,7 +48,9 @@ setExpandedCard(cardId);`}
 
           {/* Example 2: Scroll Based */}
           <div className="mb-4 p-3 bg-[#1a2634] rounded-lg">
-            <h3 className="text-green-400 font-medium text-xs mb-2">2. Scroll-Based Opening</h3>
+            <h3 className="text-green-400 font-medium text-xs mb-2">
+              2. Scroll-Based Opening
+            </h3>
             <code className="text-gray-300 text-xs block">
               {`useEffect(() => {
   const handleScroll = () => {
@@ -61,7 +65,9 @@ setExpandedCard(cardId);`}
 
           {/* Example 3: Intersection Observer */}
           <div className="mb-4 p-3 bg-[#1a2634] rounded-lg">
-            <h3 className="text-purple-400 font-medium text-xs mb-2">3. Intersection Observer</h3>
+            <h3 className="text-purple-400 font-medium text-xs mb-2">
+              3. Intersection Observer
+            </h3>
             <code className="text-gray-300 text-xs block">
               {`useEffect(() => {
   const observer = new IntersectionObserver((entries) => {
@@ -79,7 +85,9 @@ setExpandedCard(cardId);`}
 
           {/* Example 4: Timed Sequence */}
           <div className="mb-4 p-3 bg-[#1a2634] rounded-lg">
-            <h3 className="text-orange-400 font-medium text-xs mb-2">4. Timed Auto-Sequence</h3>
+            <h3 className="text-orange-400 font-medium text-xs mb-2">
+              4. Timed Auto-Sequence
+            </h3>
             <code className="text-gray-300 text-xs block">
               {`useEffect(() => {
   const timer = setInterval(() => {
@@ -92,7 +100,9 @@ setExpandedCard(cardId);`}
 
           {/* Example 5: Keyboard Control */}
           <div className="p-3 bg-[#1a2634] rounded-lg">
-            <h3 className="text-pink-400 font-medium text-xs mb-2">5. Keyboard Navigation</h3>
+            <h3 className="text-pink-400 font-medium text-xs mb-2">
+              5. Keyboard Navigation
+            </h3>
             <code className="text-gray-300 text-xs block">
               {`useEffect(() => {
   const handleKeyPress = (e) => {
@@ -151,6 +161,7 @@ setExpandedCard(cardId);`}
           </div>
         </div>
       </div>
+      <div className="w-full min-h-[120vh]"></div>
     </div>
   );
 }
