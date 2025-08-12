@@ -6,6 +6,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    color: #fb39be;
     background: linear-gradient(90deg, #fb39be 0%, #f12459 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -15,6 +16,7 @@
     font-size: 130px;
     font-weight: 400;
     line-height: normal;
+    color: #72dcff;
     background: linear-gradient(90deg, #72dcff 0%, #cd5bf3 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -28,6 +30,7 @@
     font-style: normal;
     font-weight: 900;
     line-height: normal;
+    color: #fb39be;
     background: linear-gradient(90deg, #fb39be 0%, #f12459 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -37,6 +40,7 @@
     font-size: 74px;
     font-weight: 400;
     line-height: normal;
+    color: #72dcff;
     background: linear-gradient(90deg, #72dcff 0%, #cd5bf3 100%);
     background-clip: text;
     -webkit-background-clip: text;
