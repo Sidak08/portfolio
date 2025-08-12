@@ -500,7 +500,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
   // ============================================================================
 
   /**
-   * Scrolls to position a specific card at the top of the viewport
+   * Scrolls to position a specific card at the center of the viewport
    * Uses smooth scrolling with proper offset calculations
    *
    * @param {number} index - Index of the card to center
@@ -521,12 +521,33 @@ const MobileProjectsManual = ({ active, setActive }) => {
     const cardTop = cardRect.top + window.scrollY;
     const cardHeight = cardRect.height;
 
-    // Calculate scroll position to scroll to top of card
-    const targetScrollTop = cardTop;
+    // Calculate scroll position to center the card in the viewport
+    let targetScrollTop = cardTop + 500;
+
+    // Safety checks for page boundaries
+    const documentHeight = document.documentElement.scrollHeight;
+    const maxScrollTop = documentHeight - viewportHeight;
+
+    // Ensure we don't scroll to negative positions
+    targetScrollTop = Math.max(0, targetScrollTop);
+
+    // Ensure we don't scroll past the bottom of the page
+    targetScrollTop = Math.min(maxScrollTop, targetScrollTop);
+
+    // Additional check: if the card would be cut off at the bottom when centered,
+    // adjust to show as much of the card as possible
+    const cardBottomAfterScroll = cardTop + cardHeight - targetScrollTop;
+    if (cardBottomAfterScroll > viewportHeight - 20) {
+      // If card would be cut off, position it so bottom has at least 20px padding
+      const adjustedScrollTop = cardTop + cardHeight - viewportHeight + 20;
+      if (adjustedScrollTop >= 0 && adjustedScrollTop <= maxScrollTop) {
+        targetScrollTop = adjustedScrollTop;
+      }
+    }
 
     // Smooth scroll to the calculated position
     window.scrollTo({
-      top: targetScrollTop + 200,
+      top: targetScrollTop,
       behavior: "smooth",
     });
 
@@ -540,12 +561,15 @@ const MobileProjectsManual = ({ active, setActive }) => {
       setIsScrollingOrAnimating(false);
     }, 1200);
 
-    console.log(`Scrolling to top of card ${index}:`, {
+    console.log(`Scrolling to center card ${index} with boundary checks:`, {
       cardTop: cardRect.top,
       cardHeight,
       viewportHeight,
+      documentHeight,
+      maxScrollTop,
       currentScrollY: window.scrollY,
-      targetScrollTop,
+      requestedScrollTop: cardTop - viewportHeight / 2 + cardHeight / 2,
+      finalScrollTop: targetScrollTop,
     });
   };
 
@@ -554,6 +578,8 @@ const MobileProjectsManual = ({ active, setActive }) => {
   // ============================================================================
 
   /**
+   * handleCardExpansion Function Documentation
+   *
    * Handles manual control of card expansion/collapse with smooth animations
    *
    * This function provides programmatic control over which project card is expanded.
@@ -564,14 +590,14 @@ const MobileProjectsManual = ({ active, setActive }) => {
    * @param {boolean} isManual - Whether this is a manual user interaction (default: false)
    *
    * Animation Flow:
-   * - Opening: Sets animation state → expands card → completes after 600ms
+   * - Opening: Sets animation state → centers card → expands card → completes after 600ms
    * - Closing: Sets animation state → triggers exit animations → closes after 900ms
    *
    * Usage Examples:
    *
    * 1. Open a specific card:
-   *    handleCardExpansion(1); // Opens RSVP System project
-   *    handleCardExpansion(3, true); // Opens Ios-status-bar project manually
+   *    handleCardExpansion(1); // Centers and opens RSVP System project
+   *    handleCardExpansion(3, true); // Centers and opens Ios-status-bar project manually
    *
    * 2. Close all cards:
    *    handleCardExpansion(null);
@@ -582,7 +608,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
    * 4. Integration with scroll events:
    *    const scrollY = window.scrollY;
    *    const cardIndex = Math.floor(scrollY / 200);
-   *    handleCardExpansion(cardIndex + 1);
+   *    handleCardExpansion(cardIndex + 1); // Centers card in viewport
    *
    * 5. Intersection Observer integration:
    *    useEffect(() => {
@@ -590,7 +616,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
    *        entries.forEach((entry) => {
    *          if (entry.isIntersecting) {
    *            const cardId = parseInt(entry.target.dataset.cardId);
-   *            handleCardExpansion(cardId);
+   *            handleCardExpansion(cardId); // Centers and expands card
    *          }
    *        });
    *      });
@@ -629,7 +655,7 @@ const MobileProjectsManual = ({ active, setActive }) => {
         if (expandedCard) {
           scrolledToCards.current.delete(expandedCard);
           console.log(
-            `Card ${expandedCard} removed from scrolled cards. Can be scrolled to again.`,
+            `Card ${expandedCard} removed from scrolled cards. Can be centered again.`,
           );
         }
       }, 900);
@@ -667,9 +693,9 @@ const MobileProjectsManual = ({ active, setActive }) => {
   // ============================================================================
 
   /**
-   * Effect to handle activeIndex changes and trigger card expansion with auto-scroll
+   * Effect to handle activeIndex changes and trigger card expansion with auto-centering
    * This creates a connection between scroll-based detection and card expansion
-   * Auto-scrolls only on initial load, then allows free scrolling
+   * Auto-centers cards in viewport only on initial detection, then allows free scrolling
    * Includes debouncing to prevent rapid changes
    */
   useEffect(() => {
@@ -694,18 +720,18 @@ const MobileProjectsManual = ({ active, setActive }) => {
           // Mark this card as having been scrolled to
           scrolledToCards.current.add(cardId);
           console.log(
-            `Scrolling to card ${cardId}. Scrolled cards:`,
+            `Centering card ${cardId}. Scrolled cards:`,
             Array.from(scrolledToCards.current),
           );
 
-          // Scroll to center the active card
+          // Center the active card in viewport
           scrollToCard(activeIndex);
 
           // Expand the card
           handleCardExpansion(cardId, false); // Auto expansion
         } else {
           console.log(
-            `Skipping scroll to card ${cardId} - already scrolled to. Current expanded: ${expandedCard}`,
+            `Skipping center scroll to card ${cardId} - already scrolled to. Current expanded: ${expandedCard}`,
           );
         }
       }, 300); // Small delay for stability
@@ -955,21 +981,27 @@ const ProjectCard = React.forwardRef(
           !pendingClose
         ) {
           const rect = internalRef.current.getBoundingClientRect();
-          const viewportCenter = window.innerHeight / 2;
-          const cardCenter = rect.top + rect.height / 2;
-          const distanceFromCenter = Math.abs(viewportCenter - cardCenter);
+          const cardTop = rect.top;
+          const cardBottom = rect.bottom;
 
-          // More strict centering requirements
-          const threshold = Math.min(rect.height * 0.25, 50); // Even smaller threshold
+          // Check if card is positioned at the center of the viewport (our target position)
+          const viewportHeight = window.innerHeight;
+          const cardCenter = cardTop + (cardBottom - cardTop) / 2;
+          const viewportCenter = viewportHeight / 2;
+          const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
 
-          // Check if card is centered and stable
-          const isCentered =
-            distanceFromCenter < threshold &&
-            rect.top < viewportCenter + 25 && // Optimized buffer
-            rect.bottom > viewportCenter - 25 &&
-            activeIndex !== index;
+          // Threshold for detecting if card is at target center position
+          const threshold = 50; // 50px tolerance around the center
 
-          if (isCentered && lastCenteredIndex === index) {
+          // Check if card is at center position and stable
+          const isAtTargetPosition =
+            distanceFromCenter < threshold && // Card center is within 50px of viewport center
+            cardTop >= -20 && // Card is not completely above viewport
+            cardBottom <= viewportHeight + 20 && // Card is not completely below viewport
+            cardBottom - cardTop > 60 && // Card has substantial content visible
+            activeIndex !== index; // Not already active
+
+          if (isAtTargetPosition && lastCenteredIndex === index) {
             stableCount++;
             // Only update after multiple stable checks of the same card
             if (stableCount >= stabilityThreshold) {
@@ -977,12 +1009,12 @@ const ProjectCard = React.forwardRef(
               stableCount = 0;
               lastCenteredIndex = null;
             }
-          } else if (isCentered) {
+          } else if (isAtTargetPosition) {
             lastCenteredIndex = index;
             stableCount = 1; // Start counting for this card
           } else {
             stableCount = 0;
-            lastCenteredIndex = null; // Reset if not centered
+            lastCenteredIndex = null; // Reset if not at target position
           }
         } else {
           stableCount = 0;
