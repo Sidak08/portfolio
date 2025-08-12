@@ -11,6 +11,7 @@ import DesktopResume from "./components/resume/desktop_resume";
 import DesktopContact from "./components/contact_me/desktop_contact";
 import MobileHome from "./components/home/mobile_home";
 import MobileAboutMe from "./components/about_me/mobile_about_me";
+import MobileProjects from "./components/projects/mobile_projects";
 import MobileResume from "./components/resume/mobile_resume";
 import MobileContact from "./components/contact_me/mobile_contact";
 
@@ -60,6 +61,11 @@ export default function Home() {
       )}
       {isMounted && isMobile ? (
         <MobileAboutMe active={active} setActive={setActive} />
+      ) : (
+        <></>
+      )}
+      {isMounted && isMobile ? (
+        <MobileProjects active={active} setActive={setActive} />
       ) : (
         <></>
       )}
