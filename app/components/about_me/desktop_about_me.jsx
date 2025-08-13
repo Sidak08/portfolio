@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import Typewriter from "typewriter-effect";
 import { Sarpanch } from "next/font/google";
 import SplineView from "./spline";
+import PixelCard from ".././reactBits/pixel-card";
 
 const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
@@ -18,6 +19,18 @@ export default function DesktopAboutMe({ active, setActive }) {
 
   const [scrollPos, setScrollPos] = useState(0);
   const [startTypewriter, setStartTypewriter] = useState(false);
+  const [animate, setAnimate] = useState("appear");
+
+  useEffect(() => {
+    const animationInterval = setInterval(() => {
+      setAnimate((prevAnimate) =>
+        prevAnimate === "appear" ? "disappear" : "appear",
+      );
+    }, 6000);
+
+    // Cleanup function to clear interval when component unmounts
+    return () => clearInterval(animationInterval);
+  }, []); // Empty dependency array means this runs once on mount
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -54,21 +67,23 @@ export default function DesktopAboutMe({ active, setActive }) {
             }`}
           >
             {startTypewriter && (
-              <Typewriter
-                onInit={(typewriter) => {
-                  typewriter
-                    .typeString(
-                      "Bonjour, I'm a Grade 11 high school student with a passion for programming. I love diving into code; exploring new technologies, and I am always eager to learn and improve my skills. Whether it's building web applications, experimenting with new frameworks, or debugging a machine learning algorithm, I find joy in every part of the process. In my free time, I enjoy working on personal and open-source projects. I also love attending hackathons and have won 2 so far. Furthermore, I also love many sports, such as badminton, soccer, and cricket.",
-                    )
-                    .callFunction(() => {
-                      console.log("String typed out!");
-                    })
-                    .start();
-                }}
-                options={{
-                  delay: 45, // Set typing speed to 30ms per character
-                }}
-              />
+              <PixelCard noFocus={true} animate={animate}>
+                <Typewriter
+                  onInit={(typewriter) => {
+                    typewriter
+                      .typeString(
+                        "Bonjour, I'm a Grade 11 high school student with a passion for programming. I love diving into code; exploring new technologies, and I am always eager to learn and improve my skills. Whether it's building web applications, experimenting with new frameworks, or debugging a machine learning algorithm, I find joy in every part of the process. In my free time, I enjoy working on personal and open-source projects. I also love attending hackathons and have won 2 so far. Furthermore, I also love many sports, such as badminton, soccer, and cricket.",
+                      )
+                      .callFunction(() => {
+                        console.log("String typed out!");
+                      })
+                      .start();
+                  }}
+                  options={{
+                    delay: 45, // Set typing speed to 30ms per character
+                  }}
+                />
+              </PixelCard>
             )}
           </div>
           <div className="w-[500px] h-[500px]">
