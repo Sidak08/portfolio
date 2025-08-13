@@ -84,25 +84,15 @@ export default function DesktopAboutMe({ active, setActive }) {
       ></motion.div>
       <div className="w-full h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
         <SkillScroll />
-        <div className="flex items-center justify-evenly">
-          <div
-            ref={ref}
-            className={`px-8 py-4 leading-[1.8] text-2xl flex items-center justify-center rounded-[12px] bg-[#0A1920] w-[50%] min-w-[600px] min-h-[430px] mt-12 transition-shadow duration-500 ease-in-out ${
-              scrollPos > 0.1
-                ? "shadow-[25px_25px_0_0_#7DCDFD] hover:shadow-[25px_25px_0_0_#7DFDF4]"
-                : ""
-            }`}
+        <div className="flex items-center justify-evenly flex-row w-full">
+          <PixelCard
+            noFocus={true}
+            animate={animate}
+            colors={"#0c0c6e,#0A1920,#7DCDFD,#00c1ff"}
           >
-            {startTypewriter && (
-              <PixelCard
-                noFocus={true}
-                animate={animate}
-                colors={"#0c0c6e,#0A1920,#7DCDFD,#00c1ff"}
-              >
-                <h1 className="z-50">hello</h1>
-              </PixelCard>
-            )}
-          </div>
+            <h1 className="z-50">hello</h1>
+          </PixelCard>
+
           <div className="w-[500px] h-[500px]">
             <SplineView />
           </div>

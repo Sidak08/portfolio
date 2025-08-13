@@ -5,7 +5,10 @@ import localFont from "next/font/local";
 import { useGlitch } from "react-powerglitch";
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import DarkVeil from ".././reactBits/dark-veil";
 import ProfileCard from ".././reactBits/profile-card";
+import TextType from ".././reactBits/text-type";
+import DecryptedText from ".././reactBits/decrypt";
 
 const filledText = localFont({
   src: "../.././fonts/cyber-reg-font.woff2",
@@ -20,6 +23,9 @@ const outlineText = localFont({
 export default function MobileHome({ active, setActive }) {
   const glitch = useGlitch();
 
+  const innerOpacity = 0.3;
+  const behindOpacity = 1;
+
   return (
     <section id="home" className="relative">
       <motion.div
@@ -30,37 +36,66 @@ export default function MobileHome({ active, setActive }) {
         }}
         className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
-
-      <div className="w-full h-screen bg-[#0A0F13] flex flex-col items-center justify-center">
-        {/* <div
-          ref={glitch.ref}
-          className="w-[80%] flex items-center justify-center ml-[10%]"
-        >
-          <img src="/home-profile.png" className="w-full" />
-        </div>*/}
-        <ProfileCard
-          name="Javi A. Torres"
-          title="Software Engineer"
-          handle="javicodes"
-          status="Online"
-          contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
-          showUserInfo={true}
-          enableTilt={true}
-          enableMobileTilt={true}
-          onContactClick={() => console.log("Contact clicked")}
-        />
-        <div className="w-full flex flex-col items-center justify-evenly">
-          <div className="mt-14 flex flex-col items-center justify-evenly">
-            <div className={`${styles.myNameMobile} ${outlineText.className}`}>
-              My Name
-            </div>
-            <div className={`${filledText.className} ${styles.isSidakMobile} `}>
-              Is SidaK
+      <DarkVeil
+        className="w-full h-screen"
+        hueShift={0}
+        speed={2}
+        scanlineFrequency={4.5}
+        warpAmount={2.9}
+        scanlineIntensity={0.36}
+      >
+        <div className="flex flex-col items-center justify-center w-full h-screen bg-transparent relative z-10 px-4">
+          <div className="flex flex-col items-center justify-center w-full bg-transparent space-y-8">
+            <ProfileCard
+              name="Sidak Singh"
+              title="Software Engineer"
+              handle="Sidak08"
+              status="Always Online"
+              contactText="Contact Me"
+              avatarUrl="/home-profile.png"
+              grainUrl={"/grain.png"}
+              innerGradient={` "linear-gradient(135deg, rgba(255, 0, 64, 0.3) 0%, rgba(251, 57, 190, 0.3) 25%, rgba(139, 92, 246, 0.3) 50%, rgba(59, 130, 246, 0.3) 75%, rgba(114, 220, 255, 0.3) 100%)"`}
+              behindGradient={`linear-gradient(135deg, rgba(255, 0, 64, ${behindOpacity}) 0%, rgba(251, 57, 190, ${behindOpacity}) 25%, rgba(139, 92, 246, ${behindOpacity}) 50%, rgba(59, 130, 246, ${behindOpacity}) 75%, rgba(114, 220, 255, ${behindOpacity}) 100%)`}
+              showBehindGradient={true}
+              showUserInfo={true}
+              enableTilt={true}
+              enableMobileTilt={true}
+              onContactClick={() => console.log("Contact clicked")}
+              hover
+            />
+            <div className="bg-transparent flex flex-col items-center">
+              <div
+                className={`${styles.myNameMobile} ${outlineText.className} text-center`}
+                style={{
+                  color: "#fb39be",
+                }}
+              >
+                <TextType
+                  text={["My Name is"]}
+                  typingSpeed={75}
+                  pauseDuration={1500}
+                  showCursor={true}
+                  cursorCharacter=""
+                />
+              </div>
+              <div
+                className={`${filledText.className} ${styles.isSidakMobile} mt-4 text-center`}
+                style={{
+                  color: "#72dcff",
+                }}
+              >
+                <DecryptedText
+                  text="Is Sidak"
+                  animateOn="view"
+                  revealDirection="center"
+                  speed={100}
+                  maxIterations={20}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </DarkVeil>
     </section>
   );
 }
