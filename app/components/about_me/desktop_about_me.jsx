@@ -100,21 +100,6 @@ export default function DesktopAboutMe({ active, setActive }) {
                 colors={"#0c0c6e,#0A1920,#7DCDFD,#00c1ff"}
               >
                 <h1 className="z-50">hello</h1>
-                <Typewriter
-                  onInit={(typewriter) => {
-                    typewriter
-                      .typeString(
-                        "Bonjour, I'm a Grade 11 high school student with a passion for programming. I love diving into code; exploring new technologies, and I am always eager to learn and improve my skills. Whether it's building web applications, experimenting with new frameworks, or debugging a machine learning algorithm, I find joy in every part of the process. In my free time, I enjoy working on personal and open-source projects. I also love attending hackathons and have won 2 so far. Furthermore, I also love many sports, such as badminton, soccer, and cricket.",
-                      )
-                      .callFunction(() => {
-                        console.log("String typed out!");
-                      })
-                      .start();
-                  }}
-                  options={{
-                    delay: 45, // Set typing speed to 30ms per character
-                  }}
-                />
               </PixelCard>
             )}
           </div>

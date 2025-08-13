@@ -259,15 +259,18 @@ export default function PixelCard({
   return (
     <div
       ref={containerRef}
-      className={`h-[400px] w-[300px] relative overflow-hidden grid place-items-center aspect-[4/5] border border-[#27272a] rounded-[25px] isolate transition-colors duration-200 ease-[cubic-bezier(0.5,1,0.89,1)] select-none ${className}`}
+      className={`z-0 h-[400px] w-[300px] relative overflow-hidden grid place-items-center aspect-[4/5] border border-[#27272a] rounded-[25px] isolate transition-colors duration-200 ease-[cubic-bezier(0.5,1,0.89,1)] select-none ${className}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onFocus={finalNoFocus ? undefined : onFocus}
       onBlur={finalNoFocus ? undefined : onBlur}
       tabIndex={finalNoFocus ? -1 : 0}
     >
-      <canvas className="w-full h-full block" ref={canvasRef} />
-      {children}
+      <canvas
+        className="absolute inset-0 w-full h-full block pointer-events-none"
+        ref={canvasRef}
+      />
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }
