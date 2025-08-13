@@ -22,14 +22,41 @@ export default function DesktopAboutMe({ active, setActive }) {
   const [animate, setAnimate] = useState("appear");
 
   useEffect(() => {
-    const animationInterval = setInterval(() => {
-      setAnimate((prevAnimate) =>
-        prevAnimate === "appear" ? "disappear" : "appear",
-      );
-    }, 6000);
+    let animationId;
+    let startTime;
+    const cycleDuration = 3500; // Total cycle time
+    const easeDuration = 600; // Time for ease in/out
 
-    // Cleanup function to clear interval when component unmounts
-    return () => clearInterval(animationInterval);
+    const easeInOutCubic = (t) => {
+      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    };
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = (elapsed % cycleDuration) / cycleDuration;
+
+      if (progress < 0.1) {
+        // Easy in phase (first 10% of cycle)
+        const easeProgress = easeInOutCubic(progress / 0.1);
+        setAnimate(easeProgress > 0.5 ? "appear" : "disappear");
+      } else if (progress > 0.9) {
+        // Easy out phase (last 10% of cycle)
+        const easeProgress = easeInOutCubic((progress - 0.9) / 0.1);
+        setAnimate(easeProgress > 0.5 ? "disappear" : "appear");
+      } else {
+        // Stable phase
+        setAnimate("appear");
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationId) cancelAnimationFrame(animationId);
+    };
   }, []); // Empty dependency array means this runs once on mount
 
   useEffect(() => {
@@ -67,7 +94,12 @@ export default function DesktopAboutMe({ active, setActive }) {
             }`}
           >
             {startTypewriter && (
-              <PixelCard noFocus={true} animate={animate}>
+              <PixelCard
+                noFocus={true}
+                animate={animate}
+                colors={"#0c0c6e,#0A1920,#7DCDFD,#00c1ff"}
+              >
+                <h1 className="z-50">hello</h1>
                 <Typewriter
                   onInit={(typewriter) => {
                     typewriter
