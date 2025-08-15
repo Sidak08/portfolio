@@ -33,13 +33,13 @@ export default function MobileContact({ active, setActive }) {
         className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] w-1 h-1"
       ></motion.div>
 
-      <div className="w-full h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly">
+      <div className="w-full h-screen bg-[#0A0F13] flex flex-col items-center justify-evenly px-4">
         <h1
-          className={`w-[90%] ${outlineText.className} ${styles.hollowTextMobile}`}
+          className={`w-[90%] max-w-[350px] text-center ${outlineText.className} ${styles.hollowTextMobile}`}
         >
           Contact Me
         </h1>
-        <div className="max-w-[1200px] w-[80%] min-h-[500px] rounded-xl bg-[#0A1920] flex flex-col items-start justify-evenly relative">
+        <div className="max-w-[400px] w-[90%] min-h-[500px] rounded-xl bg-[#0A1920] flex flex-col items-start justify-evenly relative mx-4">
           <Text
             text="SidakSingh318@gmail.com"
             link="mailto:sidaksingh318@gmail.com"

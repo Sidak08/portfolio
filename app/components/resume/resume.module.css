@@ -9,3 +9,29 @@
     font-weight: 400;
     line-height: normal;
 }
+
+.resumeMobile {
+    color: #a396f9;
+    text-shadow: 10px 10px 15px #a396f9;
+    -webkit-text-stroke-width: 2;
+    -webkit-text-stroke-color: #a396f9;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 480px) {
+    .resumeMobile {
+        font-size: 50px;
+        text-shadow: 8px 8px 12px #a396f9;
+        -webkit-text-stroke-width: 1.5;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+    .resumeMobile {
+        font-size: 65px;
+    }
+}

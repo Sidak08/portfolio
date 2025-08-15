@@ -9,6 +9,7 @@
     font-weight: 400;
     line-height: normal;
 }
+
 .hollowTextMobile {
     color: #9ae797;
     text-shadow: 15px 15px 20px #8cefba;
@@ -19,4 +20,21 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+/* Mobile responsive styles for Contact Me */
+@media (max-width: 480px) {
+    .hollowTextMobile {
+        font-size: 55px;
+        text-shadow: 10px 10px 15px #8cefba;
+        -webkit-text-stroke-width: 2.5;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+    .hollowTextMobile {
+        font-size: 70px;
+        text-shadow: 12px 12px 18px #8cefba;
+        -webkit-text-stroke-width: 3;
+    }
 }

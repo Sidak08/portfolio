@@ -24,7 +24,7 @@ export default function Navbar({ active, setActive, hideTmp }) {
 
   return (
     <div
-      className={`w-[400px] h-[50px] ${styles.navBarBox} fixed bottom-10 flex items-center justify-evenly z-10`}
+      className={`w-[85%] max-w-[320px] sm:w-[400px] h-[50px] ${styles.navBarBox} fixed bottom-10 left-1/2 transform -translate-x-1/2 flex items-center justify-evenly z-10`}
     >
       <button
         onClick={() => {
