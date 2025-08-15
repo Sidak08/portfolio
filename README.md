@@ -7,10 +7,16 @@ Welcome to my personal portfolio site! This website showcases various projects I
 - [Projects](#projects)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Projects
+
+### Scrapyard Brampton
+- **Description:** Founded one of the largest high school-exclusive hackathons, attracting 70+ participants. Led end-to-end event planning and secured over $20,000 in sponsorships with viral social media marketing reaching 30,000+ views. Inspired curiosity and fostered innovation in teenagers through engaging programming and mentorship.
+- **Technologies:** Event Management, Marketing, Community Building, Sponsorship Acquisition, Social Media Strategy.
+- **Links:** [Website](https://scrapyard.hackclub.com/toronto)
 
 ### RSVP System
 - **Description:** A complete reservation management system with dynamic layout mapping for restaurants. This PWA allows restaurants to create custom layouts and manage reservations through a dashboard or a unique link for guests.
@@ -109,6 +115,23 @@ Welcome to my personal portfolio site! This website showcases various projects I
    ```
 
 5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the site.
+
+## Environment Variables
+
+This project uses environment variables to control certain features. Create a `.env.local` file in the root directory to configure these options:
+
+### Available Variables
+
+- `NEXT_PUBLIC_TMP` (boolean): When set to `true`, hides the "About Me" section from both the navbar and page content in mobile and desktop views. Default is `false`.
+
+### Example .env.local file:
+
+```bash
+# Temporary flag to hide About Me section from navbar
+NEXT_PUBLIC_TMP=false
+```
+
+**Note:** Environment variables prefixed with `NEXT_PUBLIC_` are exposed to the browser and can be used in client-side code.
 
 ## Contributing
 

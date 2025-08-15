@@ -5,13 +5,22 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, useScroll } from "framer-motion";
 
-export default function Navbar({ active, setActive }) {
+export default function Navbar({ active, setActive, hideTmp }) {
+  // hideTmp prop controls whether About Me section is hidden based on TMP environment variable
   // const [active, setActive] = useState("home");
   const router = useRouter();
   // const { scrollYProgress } = useScroll();
   useEffect(() => {
     console.log(1, active);
   }, [active]);
+
+  // Redirect from aboutMe if TMP environment variable is enabled and user tries to navigate there
+  useEffect(() => {
+    if (hideTmp && active === "aboutMe") {
+      setActive("home");
+      router.push("/#home");
+    }
+  }, [hideTmp, active, setActive, router]);
 
   return (
     <div
@@ -25,14 +34,17 @@ export default function Navbar({ active, setActive }) {
       >
         <Home visible={active === "home" ? "animate" : "hidden"} />
       </button>
-      <button
-        onClick={() => {
-          setActive("aboutMe");
-          router.push("/#about_me");
-        }}
-      >
-        <User visible={active === "aboutMe" ? "animate" : "hidden"} />
-      </button>
+      {/* Only render About Me button if TMP environment variable is not enabled */}
+      {!hideTmp && (
+        <button
+          onClick={() => {
+            setActive("aboutMe");
+            router.push("/#about_me");
+          }}
+        >
+          <User visible={active === "aboutMe" ? "animate" : "hidden"} />
+        </button>
+      )}
       <button
         onClick={() => {
           setActive("projects");

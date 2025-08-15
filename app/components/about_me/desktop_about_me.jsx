@@ -7,6 +7,7 @@ import Typewriter from "typewriter-effect";
 import { Sarpanch } from "next/font/google";
 import SplineView from "./spline";
 import PixelCard from ".././reactBits/pixel-card";
+import CardSwap, { Card } from ".././reactBits/cardStack";
 
 const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
@@ -101,3 +102,16 @@ export default function DesktopAboutMe({ active, setActive }) {
     </section>
   );
 }
+
+/*
+
+left side make it a short descriotion with the pulsing effect
+
+
+cards things about me
+
+coading
+badmintion
+PCB Design
+3-d modelling
+*/

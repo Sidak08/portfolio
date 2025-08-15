@@ -19,22 +19,32 @@ import "./globals.css";
 
 export default function Home() {
   const [active, setActive] = useState("home");
+  // Check if TMP environment variable is set to hide About Me section
+  const hideTmp = process.env.NEXT_PUBLIC_TMP === "true";
 
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Redirect from aboutMe if tmp environment variable is enabled
+  useEffect(() => {
+    if (hideTmp && active === "aboutMe") {
+      setActive("home");
+    }
+  }, [hideTmp, active]);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <main className="w-full noScroll relative">
-      <Navbar active={active} setActive={setActive} />
+      <Navbar active={active} setActive={setActive} hideTmp={hideTmp} />
       {isMounted && !isMobile ? (
         <DesktopHome active={active} setActive={setActive} />
       ) : (
         <></>
       )}
-      {isMounted && !isMobile ? (
+      {/* Only render Desktop About Me if tmp is not enabled */}
+      {isMounted && !isMobile && !hideTmp ? (
         <DesktopAboutMe active={active} setActive={setActive} />
       ) : (
         <></>
@@ -59,7 +69,8 @@ export default function Home() {
       ) : (
         <></>
       )}
-      {isMounted && isMobile ? (
+      {/* Only render Mobile About Me if tmp is not enabled */}
+      {isMounted && isMobile && !hideTmp ? (
         <MobileAboutMe active={active} setActive={setActive} />
       ) : (
         <></>
