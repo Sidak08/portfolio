@@ -19,6 +19,15 @@ const outlineText = localFont({
 
 const sarpanch = Sarpanch({ subsets: ["latin"], weight: "400" });
 
+const renderEmphasis = (text) =>
+  text.split(/(\*\*.*?\*\*)/g).map((part, index) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={index}>{part.slice(2, -2)}</strong>
+    ) : (
+      part
+    ),
+  );
+
 export default function DesktopProjects({ active, setActive }) {
   return (
     <section id="projects" className={`relative ${sarpanch.className} `}>
@@ -106,11 +115,13 @@ const Project = ({ info, key }) => {
               />
             </div>
             <div className="flex-1 max-w-[600px] pr-6">
-              <h4
-                className={`text-white text-[1.375rem] leading-[1.8] ${sarpanch.className} break-words`}
+              <ul
+                className={`list-disc space-y-3 pl-6 text-white text-[1.375rem] leading-[1.8] ${sarpanch.className} break-words`}
               >
-                {info.description}
-              </h4>
+                {info.description.map((point) => (
+                  <li key={point}>{renderEmphasis(point)}</li>
+                ))}
+              </ul>
             </div>
           </div>
           <div className="flex items-center justify-between px-8 w-full mt-8 min-h-[60px]">

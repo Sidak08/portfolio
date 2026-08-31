@@ -50,7 +50,7 @@ export const icons = {
  * Each project includes:
  * - id: Unique identifier for the project
  * - title: Project display name
- * - description: Detailed project description
+ * - description: Concise, detailed project highlights
  * - image: Main project screenshot/image
  * - icons: Array of technology icons used
  * - links: Array of external links (demo, GitHub, live site)
@@ -60,8 +60,11 @@ export const projects = [
   {
     id: 1,
     title: "Scrapyard Brampton",
-    description:
-      "Founded one of the largest high school-exclusive hackathons, attracting 70+ participants. Led end-to-end event planning and secured over $20,000 in sponsorships with viral social media marketing reaching 30,000+ views. Inspired curiosity and fostered innovation in teenagers through engaging programming and mentorship experiences.",
+    description: [
+      "Founded and organized a high school-exclusive hackathon for **70+ participants**.",
+      "Led event logistics, programming, and mentorship experiences from planning through execution.",
+      "Secured **$20,000+ in sponsorships** and drove **30,000+ social-media views** through campaign strategy.",
+    ],
     image: "/project_images/ScrapyardOrganizers.JPG",
     icons: [],
     links: [
@@ -78,8 +81,11 @@ export const projects = [
   {
     id: 2,
     title: "RSVP System",
-    description:
-      "This is my largest project by far (15k lines and 78 files). It is a complete reservation management system. The PWA lets you create a dynamic layout for your restaurant; mapping out each chair and table. After that, each of them can be reserved for individual guests from our dashboard or dynamic link which is generated for every restaurant and can be sent out to the guests for them to choose at their convenience. It includes many other features that are too much to list here but can be seen in the demo video.",
+    description: [
+      "Built a **15,000-line reservation-management PWA** across **78 files**.",
+      "Created an **interactive floor-plan editor** for mapping restaurant tables and seats.",
+      "Enabled staff-managed reservations and **restaurant-specific booking links** for guests.",
+    ],
     image: "/project_images/rsvp-sys.png",
     icons: [
       icons.js,
@@ -121,8 +127,11 @@ export const projects = [
   {
     id: 3,
     title: "Portfolio",
-    description:
-      "This is my portfolio website kinda Déjà vu seeing the project while being inside the project. Well, I don't know if this text is even making it on there; I am writing this for the future, so who knows? But in this project, I discuss about myself and how I love attending hackathons. These hackathons are the reason I was interested in learning programming and have guided most of my experience. I also talk a bit about my high school experience; currently a grade 11.",
+    description: [
+      "Designed and developed a **responsive portfolio** to present projects, skills, and experience.",
+      "Showcases **hackathon work** and the learning journey that shaped my interest in software development.",
+      "Built with a custom visual system, interactive sections, and desktop/mobile-specific layouts.",
+    ],
     image: "/project_images/portfolio.png",
     icons: [
       icons.js,
@@ -161,8 +170,11 @@ export const projects = [
   {
     id: 4,
     title: "Ios-status-bar",
-    description:
-      "IOS-Status-Bar is the first npm package I created. It all started like many projects—after spending 6.5 hours on Google, trying to figure out how to edit the status bar on an iPhone when using Expo. This part of the screen is usually restricted, but I discovered a few workarounds. None of the tutorials I found actually worked, but I managed to find an exploit that did. Initially, I thought about keeping it as a local package, but I decided to try something new and publish it. The result? The package has been downloaded over 1,000 times, helping many others solve the same issue.",
+    description: [
+      "Published my **first npm package** to simplify iOS status-bar customization in Expo apps.",
+      "Developed a practical workaround for a platform area that is normally difficult to control.",
+      "Reached **1,000+ downloads** by packaging the solution for other React Native developers.",
+    ],
     image: "/project_images/ios-status-bar.png",
     icons: [icons.js, icons.react, icons.git, icons.npm, icons.expo],
     links: [
@@ -193,8 +205,11 @@ export const projects = [
   {
     id: 5,
     title: "Ai-que-cards",
-    description:
-      "This is one of the hardest projects I have attempted not because contents of the project but because it was made at GDSC Hacks under 24 hours with no sleep. The project itself is a simple masterpiece. To begin it takes in an audio recording (lecture). This audio recording is converted to text and sent to Gemini. Then Gemini is instructed to generate cue cards from the prompt. This process is repeated as a fail-safe just in case Gemini does not return JSON as an answer. Now this is the cool part the question and answer can be interacted with hand gestures. The software uses Media Pipe to detect when certain gestures are being made so closing your fist shows the answer while swiping mid-air should take you to the next question.",
+    description: [
+      "Built in **under 24 hours** at GDSC Hacks to turn lecture recordings into study materials.",
+      "Transcribes audio and uses **Gemini** to generate structured cue cards with response validation.",
+      "Uses **MediaPipe hand tracking**: a fist reveals answers and an in-air swipe advances cards.",
+    ],
     image: "/project_images/ai-que-cards.png",
     icons: [
       icons.js,
@@ -234,8 +249,11 @@ export const projects = [
   {
     id: 6,
     title: "Boom-Box.ai",
-    description:
-      "Boombox.ai is another one of my hackathon projects. This was also a difficult project for the worst reason. UFT hacks 2023 theme was retro; you can imagine how many ideas you can have with that. But we still persevered through and got this in the end. The entire UI is one massive interactive boom box. So hitting the play and pause button or adjusting the volume sliders is the correct way of interacting with it. But there is a good reason why it is called an AI. It can analyze your face guess your mood and generate a playlist which is connected to your Spotify account so you can play pause and use it from any sort of device.",
+    description: [
+      "Created a retro, **fully interactive boombox interface** for UofT Hacks 2023.",
+      "Mapped playback and volume controls directly to the physical controls in the visual UI.",
+      "Used **facial analysis** to estimate mood and generate Spotify-connected playlists.",
+    ],
     image: "/project_images/boombox.png",
     icons: [
       icons.js,
@@ -274,8 +292,11 @@ export const projects = [
   {
     id: 7,
     title: "UNI-Sign",
-    description:
-      "UniSign was inspired by a World War I documentary where we saw how those deafened by explosions struggled to communicate. This motivated us to create a solution to bridge that gap. Our research revealed a lack of tools translating sign language into other languages, leading us to develop UniSign. It uses a RandomForestClassifier with frontend technologies like Next.js, React, and Tailwind. Users capture an image of a hand sign, which the backend processes to predict the corresponding letter. The prediction is then translated into a chosen language using the Google Translate API and displayed, enabling accessible, real-time communication.",
+    description: [
+      "Built an **accessibility-focused tool** that interprets photographed hand signs as letters.",
+      "Classifies signs with a **Random Forest model** and presents predictions in a web interface.",
+      "Translates predicted text into a selected language through the Google Translate API.",
+    ],
     image: "/project_images/uni-sign.png",
     icons: [
       icons.js,
@@ -314,8 +335,11 @@ export const projects = [
   {
     id: 8,
     title: "Predicturf",
-    description:
-      "Inspired by the natural link between crypto and betting, we created PredicTurf to offer a safe, reliable app that combines both. Users log in, link their Near wallet, and access a dashboard with match predictions powered by a custom machine-learning model, a leaderboard, and betting options. Unique features include custom betting amounts and NFT stickers generated by GPT-4, stored in an Adobe Express-linked wallet. Despite challenges like implementing Near's wallet and training the model, we expanded our skills in APIs and cloud services. We plan to improve by adding more betting options, enhancing the machine learning model, and fully developing the NFT wallet.",
+    description: [
+      "Built a prediction platform combining match forecasts, leaderboards, and wallet-based participation.",
+      "Integrated **NEAR wallet connectivity** with a dashboard powered by a custom machine-learning model.",
+      "Added adjustable wager amounts and **GPT-4-generated NFT stickers** linked to Adobe Express wallets.",
+    ],
     image: "/project_images/predicturf.png",
     icons: [
       icons.js,
@@ -355,8 +379,11 @@ export const projects = [
   {
     id: 9,
     title: "Ecoquest",
-    description:
-      "Our project was inspired by the realization that society often overlooks the importance of collective action in addressing environmental and social issues. A pivotal moment occurred during a beach meeting where a staff member said, 'One person's actions might not make a difference, but when many people act together, they can create a huge impact.' This idea motivated us to develop a platform that empowers users to contribute to positive change by engaging in sustainable practices aligned with the 17 UN Sustainable Development Goals. Through our app, users can complete tasks, verified by AI, that promote sustainability and earn rewards, knowing their collective efforts can make a significant difference.",
+    description: [
+      "Created a sustainability platform organized around the **17 UN Sustainable Development Goals**.",
+      "Guides users through practical actions that contribute to environmental and social impact.",
+      "Uses **AI verification and rewards** to encourage consistent, collective participation.",
+    ],
     image: "/project_images/eco-quest.png",
     icons: [
       icons.js,
@@ -395,8 +422,11 @@ export const projects = [
   {
     id: 10,
     title: "Sprig",
-    description:
-      'Sprig is a custom console I built using a Raspberry Pi Pico, designed to host a simple yet challenging game focused on survival. In the game, you navigate by altering the direction of gravity—pressing "W" causes you to fall upwards, while "S" makes you fall downwards. The objective is to survive as long as possible by landing on moving platforms that prevent you from falling into the void. The game ends if you either fall into the void or collide with a block, making it a test of quick reflexes and timing.',
+    description: [
+      "Built a custom **Raspberry Pi Pico console** to run an original survival game.",
+      "Designed **gravity-reversing controls**: W sends the player upward and S sends them downward.",
+      "Created a reflex-based challenge where players navigate moving platforms and avoid hazards.",
+    ],
     image: "/project_images/sprig.png",
     icons: [icons.js, icons.git, icons.npm],
     links: [
@@ -427,8 +457,11 @@ export const projects = [
   {
     id: 11,
     title: "Blot",
-    description:
-      "I created a plotting device that generates a unique flower design just for you, chosen from over 80 million possible variations. Initially intended as a Mother's Day gift, the project became a personal challenge and a return to coding after a two-month break due to school and exams. Building it was a mostly enjoyable experience, though I relied heavily on trial and error and console logs before discovering the documentation for the blot library. Crafting circles was particularly tricky, but it allowed me to refresh my trigonometry skills. Overall, it was a fun and rewarding project, reigniting my passion for coding.",
+    description: [
+      "Programmed a plotting device to generate personalized flower designs with **80M+ variations**.",
+      "Created it as a Mother’s Day gift and a creative return to coding after school exams.",
+      "Applied **trigonometry** and the Blot drawing library to construct the flower geometry.",
+    ],
     image: "/project_images/blot.png",
     icons: [icons.js, icons.git, icons.npm],
     links: [

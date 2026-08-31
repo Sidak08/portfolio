@@ -4,6 +4,15 @@ import { motion, useScroll } from "framer-motion";
 import Image from "next/image";
 import { icons, projects } from "./projectsData";
 
+const renderEmphasis = (text) =>
+  text.split(/(\*\*.*?\*\*)/g).map((part, index) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={index}>{part.slice(2, -2)}</strong>
+    ) : (
+      part
+    ),
+  );
+
 /**
  * MobileProjectsManual Component
  *
@@ -771,7 +780,7 @@ const ProjectCard = React.forwardRef(
             {!isExpanded && (
               <p className="text-gray-400 text-sm leading-relaxed">
                 <span className="line-clamp-2">
-                  {project.description.substring(0, 80)}...
+                  {renderEmphasis(project.description[0])}
                 </span>
               </p>
             )}
@@ -808,9 +817,11 @@ const ProjectCard = React.forwardRef(
 
               {/* Complete project description */}
               <div className="mb-6">
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {project.description}
-                </p>
+                <ul className="list-disc space-y-2 pl-5 text-gray-300 text-sm leading-relaxed">
+                  {project.description.map((point) => (
+                    <li key={point}>{renderEmphasis(point)}</li>
+                  ))}
+                </ul>
               </div>
 
               {/* Technology stack with animated icons */}

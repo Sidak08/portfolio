@@ -51,8 +51,7 @@ export default function MobileContact({ active, setActive }) {
             Icon={Phone}
           />
           <Text
-            text="Brampton, Ontario Canada"
-            link={"https://maps.app.goo.gl/8xGw1R14q4oMu2Ds7"}
+            text="Brampton, Ontario"
             Icon={Address}
           />
           <Text
@@ -113,13 +112,12 @@ const Text = ({ text, link, Icon }) => {
     }; // Cleanup timeouts on component unmount or state change
   }, [isHovered]);
 
-  return (
-    <Link href={link}>
-      <div
-        className="flex items-start ml-4"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+  const content = (
+    <div
+      className="flex items-start ml-4"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
         <Icon color={iconColor} />
         <h1
           className={`ml-2 text-[1.1rem] font-normal font-['Saira'] ${
@@ -135,7 +133,8 @@ const Text = ({ text, link, Icon }) => {
         >
           {text}
         </h1>
-      </div>
-    </Link>
+    </div>
   );
+
+  return link ? <Link href={link}>{content}</Link> : content;
 };
